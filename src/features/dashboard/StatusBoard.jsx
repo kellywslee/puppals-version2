@@ -10,7 +10,7 @@ const StatusBoard = () => {
     { id: 4, name: 'Following', icon: <PiDog /> },
   ];
   return (
-    <section className="w-11/12rounded-lg border-2 p-4">
+    <section className="w-11/12 rounded-lg border-2 p-4">
       <ul className="grid grid-cols-2 gap-5">
         {list.map((item) => (
           <li

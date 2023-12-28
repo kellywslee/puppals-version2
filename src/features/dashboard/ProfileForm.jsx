@@ -14,6 +14,7 @@ const ProfileForm = () => {
   const { isCreating, createDog } = useCreateDog();
   const { isEditing, editDog } = useEditDog();
   const isWorking = isCreating || isEditing;
+  const today = new Date().toISOString().split('T')[0];
 
   const {
     handleSubmit,
@@ -87,6 +88,7 @@ const ProfileForm = () => {
         id="name"
         name="name"
         type="text"
+        maxLength={40}
         {...register('name', {
           required: isEditSession ? false : 'This field is required',
         })}
@@ -176,6 +178,8 @@ const ProfileForm = () => {
         id="dateOfBirth"
         name="dateOfBirth"
         type="date"
+        min="1990-01-01"
+        max={today}
         disabled={isWorking}
         {...register('dateOfBirth', {
           required: isEditSession ? false : 'This field is required',
@@ -223,6 +227,11 @@ const ProfileForm = () => {
         type="text"
         {...register('postalCode', {
           required: isEditSession ? false : 'This field is required',
+          pattern: {
+            value: /[A-Z][0-9][A-Z] ?[0-9][A-Z][0-9]/i,
+            message:
+              'Please enter a valid Canadian postal code (e.g., M1M 1M1 or M1M1M1)',
+          },
         })}
         disabled={isWorking}
         aria-invalid={errors.postalCode ? 'true' : 'false'}
@@ -261,11 +270,12 @@ const ProfileForm = () => {
         id="message"
         name="message"
         type="text"
+        rows="5"
         {...register('message', {
           required: isEditSession ? false : 'This field is required',
         })}
         disabled={isWorking}
-        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
+        className="w-full bg-white p-2 font-sans text-sm outline-slate-950"
       />
       {errors.message && (
         <p role="alert" className="self-start text-xs text-red-600">
@@ -284,10 +294,35 @@ const ProfileForm = () => {
         {...register('image', {
           required: isEditSession ? false : 'This field is required',
         })}
+        className="font-sans text-sm file:mr-3 file:border-0 file:p-2 file:font-semibold hover:file:bg-org"
       />
       {errors.image && (
         <p role="alert" className="self-start text-xs text-red-600">
           {errors.image.message}
+        </p>
+      )}
+
+      <label htmlFor="isActive" className="text-sm font-semibold">
+        Make Dog's Profile Searchable?&#42;
+      </label>
+      <select
+        id="isActive"
+        name="isActive"
+        type="text"
+        {...register('isActive', {
+          required: isEditSession ? false : 'This field is required',
+        })}
+        disabled={isWorking}
+        aria-invalid={errors.isActive ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
+      >
+        <option value=""></option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+      {errors.isActive && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.isActive.message}
         </p>
       )}
 

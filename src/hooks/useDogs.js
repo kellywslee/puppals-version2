@@ -8,15 +8,15 @@ import {
 } from '../services/apiDogs';
 import { toast } from 'react-hot-toast';
 
-export const useMyDog = () => {
+export const useMyDog = (userId) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['myDog'],
-    queryFn: getCurrentUsersDog,
+    queryKey: ['myDog', userId],
+    queryFn: () => getCurrentUsersDog(userId),
   });
   return { myDog: data, isLoading, error };
 };
 
-export const useDogs = () => {
+export const useAllDogs = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['dogs'],
     queryFn: getDogs,

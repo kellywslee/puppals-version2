@@ -33,8 +33,7 @@ export const getCurrentUsersDog = async (userId) => {
   const { data, error } = await supabase
     .from('dog')
     .select('*')
-    .eq('userId', userId)
-    .order('date', { ascending: true });
+    .eq('userId', userId);
 
   if (error) {
     console.error(error);
