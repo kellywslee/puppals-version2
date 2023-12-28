@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  main {
+    @apply mx-auto flex w-11/12 max-w-7xl grow flex-col items-center justify-center pt-12;
+  }
+  h1 {
+    @apply mb-4 text-center text-lg font-bold underline decoration-org decoration-8 underline-offset-8 md:text-xl lg:text-2xl;
+  }
+  h2 {
+    @apply text-base font-bold md:text-lg lg:text-xl;
+  }
+  h3 {
+    @apply font-bold;
+  }
+}
