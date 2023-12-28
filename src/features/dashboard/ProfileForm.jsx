@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useUser } from '../../hooks/useAuth';
 import { useCreateDog, useEditDog } from '../../hooks/useDogs';
-import Input from '../../ui/Input';
 
 const ProfileForm = () => {
   const location = useLocation();
@@ -21,7 +20,7 @@ const ProfileForm = () => {
     reset,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: 'onBlur', defaultValues: dogToEdit || {} });
 
   const fetchGeocode = useCallback(async (postalCode) => {
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${postalCode}&key=${
@@ -79,97 +78,222 @@ const ProfileForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-11/12 max-w-xs flex-col items-center justify-center gap-y-4"
+      className="flex w-11/12 max-w-xs flex-col gap-2"
     >
-      <Input
-        label="name"
-        register={register}
-        required="This field is required"
+      <label htmlFor="name" className="text-sm font-semibold">
+        Name&#42;
+      </label>
+      <input
+        id="name"
+        name="name"
         type="text"
-        placeholder="Name"
+        {...register('name', {
+          required: isEditSession ? false : 'This field is required',
+        })}
         disabled={isWorking}
-        error={errors.name}
+        aria-invalid={errors.name ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       />
+      {errors.name && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.name.message}
+        </p>
+      )}
+
+      <label htmlFor="sex" className="text-sm font-semibold">
+        Sex&#42;
+      </label>
       <select
-        {...register('sex')}
-        className=" h-10 w-full bg-white p-2 font-sans text-base"
+        id="sex"
+        name="sex"
+        type="text"
+        {...register('sex', {
+          required: isEditSession ? false : 'This field is required',
+        })}
+        disabled={isWorking}
+        aria-invalid={errors.sex ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       >
         <option value=""></option>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
-      <Input
-        label="breed"
-        register={register}
-        required="This field is required"
+      {errors.sex && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.sex.message}
+        </p>
+      )}
+
+      <label htmlFor="breed" className="text-sm font-semibold">
+        Breed&#42;
+      </label>
+      <input
+        id="breed"
+        name="breed"
         type="text"
-        placeholder="Breed"
+        {...register('breed', {
+          required: isEditSession ? false : 'This field is required',
+        })}
         disabled={isWorking}
-        error={errors.breed}
+        aria-invalid={errors.breed ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       />
+      {errors.breed && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.breed.message}
+        </p>
+      )}
+
+      <label htmlFor="size" className="text-sm font-semibold">
+        Size&#42;
+      </label>
       <select
-        {...register('size')}
-        className=" h-10 w-full  bg-white p-2 font-sans text-base"
+        id="size"
+        name="size"
+        type="text"
+        {...register('size', {
+          required: isEditSession ? false : 'This field is required',
+        })}
+        disabled={isWorking}
+        aria-invalid={errors.size ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       >
         <option value=""></option>
         <option value="small">Small (&lt; 20lb)</option>
         <option value="medium">Medium (20 - 55lb)</option>
         <option value="large">Large (&gt; 55lb)</option>
       </select>
-      <Input
-        label="dateOfBirth"
-        register={register}
-        required="This field is required"
+      {errors.size && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.size.message}
+        </p>
+      )}
+
+      <label htmlFor="dateOfBirth" className="text-sm font-semibold">
+        Date of Birth&#42;
+      </label>
+      <input
+        id="dateOfBirth"
+        name="dateOfBirth"
         type="date"
-        placeholder="Date of Birth"
         disabled={isWorking}
-        error={errors.dateOfBirth}
+        {...register('dateOfBirth', {
+          required: isEditSession ? false : 'This field is required',
+        })}
+        aria-invalid={errors.dateOfBirth ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       />
+      {errors.dateOfBirth && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.dateOfBirth.message}
+        </p>
+      )}
+
+      <label htmlFor="energyLevel" className="text-sm font-semibold">
+        Energy Level&#42;
+      </label>
       <select
-        {...register('energyLevel')}
-        className=" h-10 w-full  bg-white p-2 font-sans text-base"
+        id="energyLevel"
+        name="energyLevel"
+        type="text"
+        {...register('energyLevel', {
+          required: isEditSession ? false : 'This field is required',
+        })}
+        disabled={isWorking}
+        aria-invalid={errors.energyLevel ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       >
         <option value=""></option>
         <option value="low">Low</option>
         <option value="moderate">Moderate</option>
         <option value="high">High</option>
       </select>
-      <Input
-        label="postalCode"
-        register={register}
-        required="This field is required"
-        type="text"
-        placeholder="Postal Code"
-        disabled={isWorking}
-        error={errors.postalCode}
-      />
-      <Input
-        label="nameOfPawrents"
-        register={register}
-        required="This field is required"
-        type="text"
-        placeholder="Name of Pawrents"
-        disabled={isWorking}
-        error={errors.nameOfPawrents}
-      />
-      <textarea
-        {...register('message')}
-        type="text"
-        placeholder="Message"
-        cols={4}
-        disabled={isWorking}
-        className=" h-10 w-full  bg-white p-2 font-sans text-base"
-      />
+      {errors.energyLevel && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.energyLevel.message}
+        </p>
+      )}
+
+      <label htmlFor="postalCode" className="text-sm font-semibold">
+        Postal Code&#42;
+      </label>
       <input
-        aria-label="image"
+        id="postalCode"
+        name="postalCode"
+        type="text"
+        {...register('postalCode', {
+          required: isEditSession ? false : 'This field is required',
+        })}
+        disabled={isWorking}
+        aria-invalid={errors.postalCode ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
+      />
+      {errors.postalCode && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.postalCode.message}
+        </p>
+      )}
+
+      <label htmlFor="nameOfPawrents" className="text-sm font-semibold">
+        Name of Pawrents&#42;
+      </label>
+      <input
+        id="nameOfPawrents"
+        name="nameOfPawrents"
+        type="text"
+        {...register('nameOfPawrents', {
+          required: isEditSession ? false : 'This field is required',
+        })}
+        disabled={isWorking}
+        aria-invalid={errors.nameOfPawrents ? 'true' : 'false'}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
+      />
+      {errors.nameOfPawrents && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.nameOfPawrents.message}
+        </p>
+      )}
+
+      <label htmlFor="message" className="text-sm font-semibold">
+        Message&#42;
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        type="text"
+        {...register('message', {
+          required: isEditSession ? false : 'This field is required',
+        })}
+        disabled={isWorking}
+        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
+      />
+      {errors.message && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.message.message}
+        </p>
+      )}
+
+      <label htmlFor="image" className="text-sm font-semibold">
+        Image&#42;
+      </label>
+      <input
         id="image"
+        name="image"
         type="file"
         accept="image/*"
         {...register('image', {
           required: isEditSession ? false : 'This field is required',
         })}
       />
-      <button>Submit</button>
+      {errors.image && (
+        <p role="alert" className="self-start text-xs text-red-600">
+          {errors.image.message}
+        </p>
+      )}
+
+      <button className="m-2 h-12 w-full rounded-lg bg-org p-2 font-bold">
+        Edit
+      </button>
     </form>
   );
 };
