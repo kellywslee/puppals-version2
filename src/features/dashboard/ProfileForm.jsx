@@ -1,19 +1,22 @@
 import { useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useUser } from '../../hooks/useAuth';
 import { useCreateDog, useEditDog } from '../../hooks/useDogs';
 
-const ProfileForm = () => {
-  const location = useLocation();
+const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
+  // const location = useLocation();
   const navigate = useNavigate();
-  const dogToEdit = location.state?.dog;
-  const editId = dogToEdit?.id;
-  const isEditSession = Boolean(editId);
+  // const dogToEdit = location.state?.dog;
   const { user } = useUser();
   const { isCreating, createDog } = useCreateDog();
   const { isEditing, editDog } = useEditDog();
   const isWorking = isCreating || isEditing;
+
+  const { id: editId, ...editValues } = dogToEdit;
+  // const editId = dogToEdit?.id;
+  const isEditSession = Boolean(editId);
+
   const today = new Date().toISOString().split('T')[0];
 
   const {
@@ -21,7 +24,10 @@ const ProfileForm = () => {
     reset,
     register,
     formState: { errors },
-  } = useForm({ mode: 'onBlur', defaultValues: dogToEdit || {} });
+  } = useForm({
+    mode: 'onBlur',
+    defaultValues: isEditSession ? editValues : {},
+  });
 
   const fetchGeocode = useCallback(async (postalCode) => {
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${postalCode}&key=${
@@ -43,7 +49,6 @@ const ProfileForm = () => {
       console.error('Geolocation could not be fetched');
       return;
     }
-    console.log('location', location);
 
     const image = typeof data.image === 'string' ? data.image : data.image[0];
 
@@ -58,8 +63,9 @@ const ProfileForm = () => {
           id: editId,
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             reset();
+            onCloseModal?.();
             navigate('/dashboard');
           },
         },
@@ -70,6 +76,7 @@ const ProfileForm = () => {
         {
           onSuccess: () => {
             reset();
+            onCloseModal?.();
             navigate('/dashboard');
           },
         },
@@ -79,6 +86,7 @@ const ProfileForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
+      type={onCloseModal ? 'modal' : 'regular'}
       className="flex w-11/12 max-w-xs flex-col gap-2"
     >
       <label htmlFor="name" className="text-sm font-semibold">
