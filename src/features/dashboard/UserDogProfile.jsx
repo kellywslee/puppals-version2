@@ -3,7 +3,7 @@ import { BsCircleFill } from 'react-icons/bs';
 import { useUser } from '../../hooks/useAuth';
 import { useMyDog } from '../../hooks/useDogs';
 import {
-  capitalizeFirstLetter,
+  capFirstLowerRest,
   capitalizeAllLetters,
   calculateAge,
 } from '../../utils/helpers';
@@ -38,12 +38,12 @@ const UserDogProfile = () => {
   const dogData = myDog[0] || defaultDogData;
 
   return (
-    <section className="w-11/12 rounded-lg border-2 p-4">
+    <section className="mb-4 w-11/12 rounded-lg border-2 p-3">
       <div className="mb-2 flex items-center justify-between gap-4">
-        <h2 className="mb-2 text-lg">My Dog&apos;s Profile</h2>
+        <h2 className="mb-2 text-base">My Dog&apos;s Profile</h2>
         <EditProfile dogToEdit={myDog[0]} />
       </div>
-      <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-2">
+      <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-2 text-sm ">
         <li className="col-span-2 row-span-3 place-self-center">
           <img
             src={dogData.image}
@@ -51,7 +51,9 @@ const UserDogProfile = () => {
             className="h-28 w-28 rounded-xl object-cover"
           />
         </li>
-        <li className="col-span-2 text-xl font-bold">{dogData.name}</li>
+        <li className="col-span-2 text-xl font-bold">
+          {capFirstLowerRest(dogData.name)}
+        </li>
         <li className="col-span-2 flex items-center">
           <BsCircleFill
             className={`${
@@ -67,7 +69,6 @@ const UserDogProfile = () => {
           {dogData.size}
         </li>
         <li className="col-span-2">
-          <span className="font-bold">Postal Code: </span>
           {capitalizeAllLetters(dogData.postalCode)}
         </li>
         <li className="col-span-4">
@@ -80,7 +81,7 @@ const UserDogProfile = () => {
         </li>
         <li className="col-span-4">
           <span className="font-bold">Name of Pawrents: </span>
-          {capitalizeFirstLetter(dogData.nameOfPawrents)}
+          {capFirstLowerRest(dogData.nameOfPawrents)}
         </li>
         <li className="col-span-4">
           <span className="font-bold">Message: </span>

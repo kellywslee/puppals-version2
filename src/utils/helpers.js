@@ -37,12 +37,12 @@ export const calculateAge = (dob) => {
   }
 };
 
-// To capitalize first letter of a string
-export const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
 // To capitaliza all letters of a string
 export const capitalizeAllLetters = (string) => {
   return string.toUpperCase();
+};
+
+// To capitalize first letter of a string and lowercase the rest
+export const capFirstLowerRest = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 };

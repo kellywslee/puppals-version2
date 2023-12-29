@@ -25,7 +25,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="z-1 flex h-16 w-full items-center justify-center bg-green2">
+    <footer className="h-18 flex w-full items-center justify-center bg-green2 p-2">
       <div className=" flex w-11/12 max-w-7xl flex-col items-center justify-center gap-y-2 text-xs md:flex-row md:justify-between md:text-xs lg:text-sm">
         <address className="flex flex-col items-center justify-center space-y-1 not-italic md:place-items-start">
           <p className="duration-400 transition ease-in-out hover:text-slate-50">

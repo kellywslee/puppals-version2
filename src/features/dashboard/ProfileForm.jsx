@@ -303,7 +303,7 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
         {...register('image', {
           required: isEditSession ? false : 'This field is required',
         })}
-        className="font-sans text-sm file:mr-3 file:border-0 file:p-2 file:font-semibold hover:file:bg-org"
+        className="font-sans text-sm duration-1000 file:mr-3 file:rounded-md file:border-0 file:p-2 file:font-semibold hover:file:bg-org"
       />
       {errors.image && (
         <p role="alert" className="self-start text-xs text-red-600">
@@ -335,9 +335,17 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
         </p>
       )}
 
-      <button className="m-2 h-12 w-full rounded-lg bg-org p-2 font-bold">
-        Edit
-      </button>
+      <div className="flex gap-1">
+        <button
+          onClick={onCloseModal}
+          className="m-2 h-12 w-full rounded-lg border-2 border-org p-2 font-bold transition-all  hover:bg-orange-400"
+        >
+          Cancel
+        </button>
+        <button className="m-2 h-12 w-full rounded-lg bg-org p-2 font-bold transition-all hover:bg-orange-400 ">
+          Edit
+        </button>
+      </div>
     </form>
   );
 };

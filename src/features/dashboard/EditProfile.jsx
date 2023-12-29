@@ -10,7 +10,7 @@ const EditProfile = ({ dogToEdit }) => {
     <>
       <button
         onClick={() => setModalOpen((show) => !show)}
-        className="mb-2 h-auto w-auto rounded-lg bg-org px-2 py-1 transition-all duration-300 hover:bg-orange-400 hover:font-bold"
+        className="mb-2 h-auto w-auto rounded-lg bg-org px-2 py-1 text-sm font-semibold transition-all duration-300 hover:bg-orange-400 hover:font-bold"
       >
         Edit Profile
       </button>

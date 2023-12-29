@@ -10,7 +10,10 @@ const Modal = ({ title, children, onClose }) => {
             {title}
           </h3>
         )}
-        <ImCross onClick={onClose} className="absolute right-4 top-4 text-xl" />
+        <ImCross
+          onClick={onClose}
+          className="transition:all absolute right-4 top-4 text-xl hover:cursor-pointer hover:text-org"
+        />
         {children}
       </div>
     </div>,
