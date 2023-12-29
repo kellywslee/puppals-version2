@@ -9,7 +9,7 @@ const EditProfile = () => {
     <>
       <button
         onClick={() => setModalOpen((show) => !show)}
-        className="mb-2 h-10 w-full rounded-lg bg-org"
+        className="mb-2 h-auto w-auto rounded-lg bg-org px-2 py-1 transition-all duration-300 hover:bg-orange-400 hover:font-bold"
       >
         Edit Profile
       </button>

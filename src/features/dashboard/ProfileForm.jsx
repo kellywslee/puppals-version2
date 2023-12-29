@@ -133,6 +133,7 @@ const ProfileForm = () => {
         id="breed"
         name="breed"
         type="text"
+        maxLength={40}
         {...register('breed', {
           required: isEditSession ? false : 'This field is required',
         })}
@@ -250,6 +251,7 @@ const ProfileForm = () => {
         id="nameOfPawrents"
         name="nameOfPawrents"
         type="text"
+        maxLength={40}
         {...register('nameOfPawrents', {
           required: isEditSession ? false : 'This field is required',
         })}
@@ -271,6 +273,7 @@ const ProfileForm = () => {
         name="message"
         type="text"
         rows="5"
+        maxLength={210}
         {...register('message', {
           required: isEditSession ? false : 'This field is required',
         })}
