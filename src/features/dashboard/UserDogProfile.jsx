@@ -12,25 +12,26 @@ import Spinner from '../../ui/Spinner';
 
 const UserDogProfile = () => {
   const { user } = useUser();
-  const { myDog, isLoading, error } = useMyDog(user.id);
+  const { myDog, isLoading, error } = useMyDog(user?.id);
+  if (!user) return <Spinner />;
 
   if (isLoading) return <Spinner />;
 
   if (error) return toast.error('Error fetching dog profile');
 
   const defaultDogData = {
-    image: `https://${
+    image: `${
       import.meta.env.VITE_SUPABASE_URL
     }/storage/v1/object/public/dogImage/defalut_image.png`,
     name: 'Your Dog',
     breed: 'Not specified',
     isActive: false,
-    sex: 'Not specified',
-    dateOfBirth: 'Not specified',
-    size: 'Not specified',
-    postalCode: 'Not specified',
-    energyLevel: 'Not specified',
-    nameOfPawrents: user.name || 'Not specified',
+    sex: 'M',
+    dateOfBirth: '2023-01-01',
+    size: 'Small',
+    postalCode: 'A1A 1A1',
+    energyLevel: 'Low',
+    nameOfPawrents: 'Not specified',
     message: 'No message yet',
   };
 
@@ -45,7 +46,7 @@ const UserDogProfile = () => {
       <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-2">
         <li className="col-span-2 row-span-3 place-self-center">
           <img
-            src={myDog[0]?.image}
+            src={dogData.image}
             alt={`${dogData.name} the ${dogData.breed} dog`}
             className="h-28 w-28 rounded-xl object-cover"
           />
