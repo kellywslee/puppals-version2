@@ -28,7 +28,7 @@ const UserDogProfile = () => {
     isActive: false,
     sex: 'M',
     dateOfBirth: '2023-01-01',
-    size: 'Small',
+    weight: 10,
     postalCode: 'A1A 1A1',
     energyLevel: 'Low',
     nameOfPawrents: 'Not specified',
@@ -68,8 +68,8 @@ const UserDogProfile = () => {
         <li>{calculateAge(dogData.dateOfBirth)}</li>
         <li>{capitalizeAllLetters(dogData.postalCode)}</li>
         <li className="col-span-5 lg:col-span-1">
-          <span className="font-bold">Size: </span>
-          {dogData.size}
+          <span className="font-bold">Weight: </span>
+          {dogData.weight}&nbsp;lb
         </li>
 
         <li className="col-span-5 lg:col-span-1">

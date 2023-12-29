@@ -153,28 +153,25 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
         </p>
       )}
 
-      <label htmlFor="size" className="text-sm font-semibold">
-        Size&#42;
+      <label htmlFor="weight" className="text-sm font-semibold">
+        Size(lb)&#42;
       </label>
-      <select
-        id="size"
-        name="size"
-        type="text"
-        {...register('size', {
+      <input
+        id="weight"
+        name="weight"
+        type="number"
+        min="0"
+        max="300"
+        {...register('weight', {
           required: isEditSession ? false : 'This field is required',
         })}
         disabled={isWorking}
-        aria-invalid={errors.size ? 'true' : 'false'}
+        aria-invalid={errors.weight ? 'true' : 'false'}
         className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
-      >
-        <option value=""></option>
-        <option value="Small">Small (&lt; 20lb)</option>
-        <option value="Medium">Medium (20 - 55lb)</option>
-        <option value="Large">Large (&gt; 55lb)</option>
-      </select>
-      {errors.size && (
+      />
+      {errors.weight && (
         <p role="alert" className="self-start text-xs text-red-600">
-          {errors.size.message}
+          {errors.weight.message}
         </p>
       )}
 

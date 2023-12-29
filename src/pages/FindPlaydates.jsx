@@ -4,10 +4,12 @@ import Map from '../features/findPlaydates/Map';
 
 const FindPlaydates = () => {
   return (
-    <main className="flex-row gap-4">
+    <main>
       <SearchOperation />
-      <Outlet />
-      <Map />
+      <section className="flex flex-col">
+        <Outlet />
+        <Map />
+      </section>
     </main>
   );
 };
