@@ -4,17 +4,15 @@ import { useForm } from 'react-hook-form';
 import { useUser } from '../../hooks/useAuth';
 import { useCreateDog, useEditDog } from '../../hooks/useDogs';
 
+// eslint-disable-next-line react/prop-types
 const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
-  // const location = useLocation();
   const navigate = useNavigate();
-  // const dogToEdit = location.state?.dog;
   const { user } = useUser();
   const { isCreating, createDog } = useCreateDog();
   const { isEditing, editDog } = useEditDog();
   const isWorking = isCreating || isEditing;
 
   const { id: editId, ...editValues } = dogToEdit;
-  // const editId = dogToEdit?.id;
   const isEditSession = Boolean(editId);
 
   const today = new Date().toISOString().split('T')[0];
@@ -63,7 +61,7 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
           id: editId,
         },
         {
-          onSuccess: (data) => {
+          onSuccess: () => {
             reset();
             onCloseModal?.();
             navigate('/dashboard');

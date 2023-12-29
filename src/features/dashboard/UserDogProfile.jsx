@@ -41,7 +41,7 @@ const UserDogProfile = () => {
     <section className="w-11/12 rounded-lg border-2 p-4">
       <div className="mb-2 flex items-center justify-between gap-4">
         <h2 className="mb-2 text-lg">My Dog&apos;s Profile</h2>
-        <EditProfile />
+        <EditProfile dogToEdit={myDog[0]} />
       </div>
       <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-2">
         <li className="col-span-2 row-span-3 place-self-center">

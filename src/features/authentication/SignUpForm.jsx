@@ -1,11 +1,10 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useSignup } from '../../hooks/useAuth';
 import Input from '../../ui/Input';
 import Button from '../../ui/Button';
 
 const SignUpForm = () => {
-  const navigate = useNavigate();
   const { signup, isLoading, error } = useSignup();
   const {
     handleSubmit,
@@ -21,7 +20,6 @@ const SignUpForm = () => {
       {
         onSettled: () => {
           reset();
-          navigate('/dashboard', { replace: true });
         },
       },
     );
@@ -68,7 +66,7 @@ const SignUpForm = () => {
         disabled={isLoading}
         error={errors.confirmPassword}
       />
-      <Button type="primary">Login</Button>
+      <Button>Login</Button>
       {error && <p className=" text-xs text-red-600">{error.message}</p>}
       <div className="flex flex-col items-center gap-2 text-xs">
         <Link

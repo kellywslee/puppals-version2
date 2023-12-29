@@ -34,15 +34,20 @@ export const useLogin = () => {
 };
 
 export const useSignup = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const {
     mutate: signup,
     isLoading,
     error,
   } = useMutation({
     mutationFn: signupApi,
-    onSuccess: () => {
+    onSuccess: (user) => {
+      queryClient.setQueryData(['user'], user.user);
       toast.success('Account successfully created!');
+      navigate('/dashboard', { replace: true });
     },
+
     onError: (err) => toast.error(err.message),
   });
 

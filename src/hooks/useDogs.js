@@ -37,8 +37,9 @@ export const useCreateDog = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation({
     mutationFn: createEditDog,
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries(['dogs']);
+      queryClient.invalidateQueries(['myDog', data.userId]);
       toast.success('Profile submitted!');
     },
     onError: (err) => {
@@ -53,9 +54,11 @@ export const useEditDog = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ newDogData, id }) => createEditDog(newDogData, id),
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.success('Profile successfully edited');
       queryClient.invalidateQueries({ queryKey: ['dogs'] });
+      queryClient.invalidateQueries(['dog', data.id]);
+      queryClient.invalidateQueries(['myDog', data.userId]);
     },
     onError: (err) => toast.error(err.message),
   });
