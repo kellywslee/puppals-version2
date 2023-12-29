@@ -1,10 +1,12 @@
-import Sidebar from '../ui/Sidebar';
+import { Outlet } from 'react-router-dom';
+import SearchOperation from '../features/findPlaydates/SearchOperation';
 import Map from '../features/findPlaydates/Map';
 
 const FindPlaydates = () => {
   return (
-    <main className="mx-auto flex w-11/12 max-w-7xl grow flex-col gap-2 pt-12 lg:flex-row lg:gap-12">
-      <Sidebar />
+    <main className="flex-row gap-4">
+      <SearchOperation />
+      <Outlet />
       <Map />
     </main>
   );

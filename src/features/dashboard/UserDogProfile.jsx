@@ -38,23 +38,25 @@ const UserDogProfile = () => {
   const dogData = myDog[0] || defaultDogData;
 
   return (
-    <section className="mb-4 w-11/12 rounded-lg border-2 p-3">
-      <div className="mb-2 flex items-center justify-between gap-4">
-        <h2 className="mb-2 text-base">My Dog&apos;s Profile</h2>
+    <section className="mb-4 flex w-11/12 flex-col items-center justify-center rounded-lg border-2 p-3">
+      <div className="mb-2 flex w-full flex-row justify-between lg:w-3/4">
+        <h2 className="mb-2 text-base md:text-lg lg:text-xl">
+          My Dog&apos;s Profile
+        </h2>
         <EditProfile dogToEdit={myDog[0]} />
       </div>
-      <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-2 text-sm ">
-        <li className="col-span-2 row-span-3 place-self-center">
+      <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-2 text-sm md:gap-x-12 md:text-base lg:w-3/4">
+        <li className="col-span-2 row-span-3 place-self-center lg:row-span-4 lg:place-self-start">
           <img
             src={dogData.image}
             alt={`${dogData.name} the ${dogData.breed} dog`}
-            className="h-28 w-28 rounded-xl object-cover"
+            className="h-28 w-28 rounded-xl object-cover md:h-40 md:w-40"
           />
         </li>
-        <li className="col-span-2 text-xl font-bold">
+        <li className="col-span-3 text-xl font-bold md:text-2xl">
           {capFirstLowerRest(dogData.name)}
         </li>
-        <li className="col-span-2 flex items-center">
+        <li className="col-span-3 flex items-center">
           <BsCircleFill
             className={`${
               dogData.isActive ? 'text-green2' : 'text-red-600'
@@ -64,26 +66,25 @@ const UserDogProfile = () => {
         </li>
         <li>{dogData.sex}</li>
         <li>{calculateAge(dogData.dateOfBirth)}</li>
-        <li className="col-span-2">
+        <li>{capitalizeAllLetters(dogData.postalCode)}</li>
+        <li className="col-span-5 lg:col-span-1">
           <span className="font-bold">Size: </span>
           {dogData.size}
         </li>
-        <li className="col-span-2">
-          {capitalizeAllLetters(dogData.postalCode)}
-        </li>
-        <li className="col-span-4">
+
+        <li className="col-span-5 lg:col-span-1">
           <span className="font-bold">Breed: </span>
           {dogData.breed}
         </li>
-        <li className="col-span-4">
+        <li className="col-span-5 lg:col-span-1">
           <span className="font-bold">Energy Level: </span>
           {dogData.energyLevel}
         </li>
-        <li className="col-span-4">
+        <li className="col-span-5 lg:col-span-3">
           <span className="font-bold">Name of Pawrents: </span>
           {capFirstLowerRest(dogData.nameOfPawrents)}
         </li>
-        <li className="col-span-4">
+        <li className="col-span-5">
           <span className="font-bold">Message: </span>
           {dogData.message}
         </li>
