@@ -16,21 +16,24 @@ const UserDogProfile = () => {
 
   return (
     <section className="w-11/12 rounded-lg border-2 p-4">
-      <ul className="flex flex-col">
-        <li>
+      <ul className="grid grid-cols-4 grid-rows-7 items-center gap-x-6">
+        <li className="col-span-2 row-span-3 self-center">
+          <img src={myDog[0]?.image} className="rounded-xl object-cover" />
+        </li>
+        <li className="col-span-2 place-self-center text-xl font-bold">
+          {myDog[0]?.name}
+        </li>
+        <li className="col-span-2">Active:</li>
+        <li className="col-span-2">{myDog[0]?.breed}</li>
+        <li className="col-span-2">
           <EditProfile />
         </li>
-        <li className="w-7/12">
-          <img src={myDog[0]?.image} />
-        </li>
-        <li>Name: {myDog[0]?.name}</li>
-        <li>{myDog[0]?.breed}</li>
         <li>{myDog[0]?.sex}</li>
         <li>{myDog[0]?.age}</li>
         <li>{myDog[0]?.size}</li>
-        <li>{myDog[0]?.energyLevel}</li>
-        <li>{myDog[0]?.postalCode}</li>
-        <li>{myDog[0]?.pawrentsName}</li>
+        <li className="col-span-4">{myDog[0]?.energyLevel}</li>
+        <li className="col-span-4">{myDog[0]?.postalCode}</li>
+        <li className="col-span-4">{myDog[0]?.pawrentsName}</li>
         <li>{myDog[0]?.message}</li>
       </ul>
     </section>

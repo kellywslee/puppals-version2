@@ -117,8 +117,8 @@ const ProfileForm = () => {
         className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       >
         <option value=""></option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
       </select>
       {errors.sex && (
         <p role="alert" className="self-start text-xs text-red-600">
@@ -161,9 +161,9 @@ const ProfileForm = () => {
         className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       >
         <option value=""></option>
-        <option value="small">Small (&lt; 20lb)</option>
-        <option value="medium">Medium (20 - 55lb)</option>
-        <option value="large">Large (&gt; 55lb)</option>
+        <option value="Small">Small (&lt; 20lb)</option>
+        <option value="Medium">Medium (20 - 55lb)</option>
+        <option value="Large">Large (&gt; 55lb)</option>
       </select>
       {errors.size && (
         <p role="alert" className="self-start text-xs text-red-600">
@@ -208,9 +208,9 @@ const ProfileForm = () => {
         className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       >
         <option value=""></option>
-        <option value="low">Low</option>
-        <option value="moderate">Moderate</option>
-        <option value="high">High</option>
+        <option value="Low">Low</option>
+        <option value="Moderate">Moderate</option>
+        <option value="High">High</option>
       </select>
       {errors.energyLevel && (
         <p role="alert" className="self-start text-xs text-red-600">
@@ -303,7 +303,7 @@ const ProfileForm = () => {
       )}
 
       <label htmlFor="isActive" className="text-sm font-semibold">
-        Make Dog's Profile Searchable?&#42;
+        Make Dog&apos;s Profile Searchable?&#42;
       </label>
       <select
         id="isActive"

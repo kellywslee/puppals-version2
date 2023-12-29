@@ -58,6 +58,8 @@ export const createEditDog = async (newDog, id) => {
         ...newDog,
         image: imagePath,
         location: `POINT(${newDog.location.lng} ${newDog.location.lat})`,
+        lat: newDog.location.lat,
+        lng: newDog.location.lng,
       },
     ]);
   if (id)
@@ -66,6 +68,8 @@ export const createEditDog = async (newDog, id) => {
         ...newDog,
         image: imagePath,
         location: `POINT(${newDog.location.lng} ${newDog.location.lat})`,
+        lat: newDog.location.lat,
+        lng: newDog.location.lng,
       })
       .eq('id', id);
 
