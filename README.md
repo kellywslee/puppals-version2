@@ -1,3 +1,5 @@
 PupPals - Version 2
 
-- React + Supabase
+- React
+- Supabase
+- Tailwind

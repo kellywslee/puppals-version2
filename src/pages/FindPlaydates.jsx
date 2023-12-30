@@ -4,10 +4,10 @@ import Map from '../features/findPlaydates/Map';
 
 const FindPlaydates = () => {
   return (
-    <main>
+    <main className="gap-2">
       <h1>Find Playdates!</h1>
       <SearchOperation />
-      <section className="flex flex-col">
+      <section className="flex w-full flex-col gap-2">
         <Outlet />
         <Map />
       </section>

@@ -21,6 +21,9 @@ export default {
       boxShadow: {
         sp: '#020617 2px 2px 0 0',
       },
+      gridTemplateColumns: {
+        profile: '4rem 8rem repeat(4,1fr)',
+      },
       scrollSnapType: {
         yMandatory: 'y mandatory',
       },
