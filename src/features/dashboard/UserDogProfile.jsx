@@ -9,8 +9,30 @@ const UserDogProfile = () => {
   const { user } = useUser();
   const { myDog, isLoading, error } = useMyDog(user?.id);
 
-  if (!user) return <Hearts color="#ffbf69" />;
-  if (isLoading) return <Hearts color="#ffbf69" />;
+  if (!user)
+    return (
+      <Hearts
+        color="#ffbf69"
+        wrapperStyle={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      />
+    );
+  if (isLoading)
+    return (
+      <Hearts
+        color="#ffbf69"
+        wrapperStyle={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      />
+    );
   if (error) return toast.error('Error fetching dog profile');
 
   const defaultDogData = {

@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
 import {
   getCurrentUsersDog,
   getDogs,
@@ -25,8 +24,7 @@ export const useAllDogs = (currentUserDogId) => {
   return { dogs: data, isLoading, error };
 };
 
-export const useDog = () => {
-  const { dogId } = useParams();
+export const useDog = (dogId) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['dog', dogId],
     queryFn: () => getDog(dogId),
