@@ -23,12 +23,10 @@ export default {
       },
       gridTemplateColumns: {
         profile: '4rem repeat(4,1fr)',
+        fullProfile: '12rem repeat(3,1fr)',
       },
       scrollSnapType: {
         yMandatory: 'y mandatory',
-      },
-      scrollBehavior: {
-        smooth: 'smooth',
       },
       scrollSnapAlign: {
         center: 'center',

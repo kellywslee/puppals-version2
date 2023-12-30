@@ -10,7 +10,18 @@ const MiniProfile = ({ dog }) => {
   const { user } = useUser();
   const { myDog, isLoading, error } = useMyDog(user?.id);
 
-  if (!user || isLoading) return <Hearts color="#ffbf69" />;
+  if (!user || isLoading)
+    return (
+      <Hearts
+        color="#ffbf69"
+        wrapperStyle={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100dvh',
+        }}
+      />
+    );
   if (error) return toast.error('Error fetching dog profile');
 
   const distance = parseFloat(
@@ -19,7 +30,7 @@ const MiniProfile = ({ dog }) => {
 
   return (
     <Link to={`/findplaydates/dogs/${dog.id}?lat=${dog.lat}&lng=${dog.lng}`}>
-      <ul className="grid w-full grid-cols-profile grid-rows-3 rounded-lg border-1 border-gray-300 p-2 text-xs">
+      <ul className="grid w-full grid-cols-profile grid-rows-3 rounded-lg border-1 border-gray-300 p-2 text-xs hover:border-org">
         <li className="row-span-3 place-self-center">
           <img
             src={dog?.image}

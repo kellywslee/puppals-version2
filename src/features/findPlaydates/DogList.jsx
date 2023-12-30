@@ -26,7 +26,18 @@ const DogList = () => {
   const sizeFilters = searchParams.get('size')?.split(',') || [];
   const energyLevelFilters = searchParams.get('energyLevel')?.split(',') || [];
 
-  if (isLoadingMyDog || isLoadingAllDogs) return <Hearts color="#ffbf69" />;
+  if (isLoadingMyDog || isLoadingAllDogs)
+    return (
+      <Hearts
+        color="#ffbf69"
+        wrapperStyle={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100dvh',
+        }}
+      />
+    );
   if (errorMyDog || errorAllDogs) {
     toast.error('Error loading dogs');
     return null;
@@ -64,11 +75,13 @@ const DogList = () => {
   });
 
   return (
-    <section className="flex w-full flex-col gap-2">
+    <section className="flex w-full flex-col gap-2 overflow-auto">
       {filteredDogs.length ? (
         filteredDogs.map((dog) => <MiniProfile key={dog.id} dog={dog} />)
       ) : (
-        <p>No matches found. 🥲 Try adjusting your filters.</p>
+        <p className="w-11/12 text-center text-sm">
+          No matches found. 🥲 Try adjusting your filters.
+        </p>
       )}
     </section>
   );

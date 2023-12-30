@@ -4,7 +4,6 @@ export const getDogs = async (currentUserDogId) => {
   const { data, error } = await supabase
     .from('dog')
     .select('*')
-    .eq('isActive', true)
     .not('id', 'eq', currentUserDogId);
 
   if (error) {

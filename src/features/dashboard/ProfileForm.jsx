@@ -154,24 +154,24 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
       )}
 
       <label htmlFor="weight" className="text-sm font-semibold">
-        Size(lb)&#42;
+        Weight(lb)&#42;
       </label>
       <input
         id="weight"
-        name="weight"
+        name="size"
         type="number"
         min="0"
         max="300"
-        {...register('weight', {
+        {...register('size', {
           required: isEditSession ? false : 'This field is required',
         })}
         disabled={isWorking}
-        aria-invalid={errors.weight ? 'true' : 'false'}
+        aria-invalid={errors.size ? 'true' : 'false'}
         className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       />
-      {errors.weight && (
+      {errors.size && (
         <p role="alert" className="self-start text-xs text-red-600">
-          {errors.weight.message}
+          {errors.size.message}
         </p>
       )}
 
@@ -309,7 +309,7 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
       )}
 
       <label htmlFor="isActive" className="text-sm font-semibold">
-        Make Dog&apos;s Profile Searchable?&#42;
+        Set Dog&apos;s Profile to Active Status?&#42;
       </label>
       <select
         id="isActive"
