@@ -16,10 +16,11 @@ export const useMyDog = (userId) => {
   return { myDog: data, isLoading, error };
 };
 
-export const useAllDogs = () => {
+export const useAllDogs = (currentUserDogId) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['dogs'],
-    queryFn: getDogs,
+    queryKey: ['dogs', currentUserDogId],
+    queryFn: () =>
+      currentUserDogId != null ? getDogs(currentUserDogId) : getDogs(),
   });
   return { dogs: data, isLoading, error };
 };

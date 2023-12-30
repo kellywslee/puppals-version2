@@ -1,10 +1,11 @@
 import supabase, { supabaseUrl } from './supabase';
 
-export const getDogs = async () => {
+export const getDogs = async (currentUserDogId) => {
   const { data, error } = await supabase
     .from('dog')
     .select('*')
-    .eq('isActive', true);
+    .eq('isActive', true)
+    .not('id', 'eq', currentUserDogId);
 
   if (error) {
     console.error(error);
