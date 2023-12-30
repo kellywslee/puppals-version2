@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useSearchParams } from 'react-router-dom';
+import { camelToTitle } from '../../utils/helpers';
 
 const Filter = ({ filterField, options }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -29,10 +30,12 @@ const Filter = ({ filterField, options }) => {
   };
 
   return (
-    <fieldset className="flex flex-col rounded-lg border border-gray-200 p-4">
-      <legend className="mb-2 text-lg font-semibold">{filterField}</legend>
+    <fieldset className="flex rounded-lg border-none p-1">
+      <legend className="mb-1 text-sm font-semibold">
+        {camelToTitle(filterField)}
+      </legend>
       {options.map((option) => (
-        <div key={option.value} className="mb-2 flex items-center">
+        <div key={option.value} className="mb-1 flex items-center">
           <input
             type="checkbox"
             id={`${filterField}-${option.value}`}
@@ -42,11 +45,11 @@ const Filter = ({ filterField, options }) => {
               .get(filterField)
               ?.split(',')
               .includes(option.value)}
-            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            className="h-3 w-3 rounded-lg border-slate-950 accent-org focus:ring-teal-600"
           />
           <label
             htmlFor={`${filterField}-${option.value}`}
-            className="ml-2 text-sm"
+            className="ml-1 mr-1 text-xs"
           >
             {option.value}
           </label>

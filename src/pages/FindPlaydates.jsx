@@ -5,6 +5,7 @@ import Map from '../features/findPlaydates/Map';
 const FindPlaydates = () => {
   return (
     <main>
+      <h1>Find Playdates!</h1>
       <SearchOperation />
       <section className="flex flex-col">
         <Outlet />

@@ -10,14 +10,7 @@ const SortBy = ({ options }) => {
     setSearchParams(searchParams);
   };
 
-  return (
-    <Select
-      options={options}
-      value={sortBy}
-      onChange={handleChange}
-      className="h-10 w-20"
-    />
-  );
+  return <Select options={options} value={sortBy} onChange={handleChange} />;
 };
 
 export default SortBy;
