@@ -7,16 +7,16 @@ const SearchOperation = () => {
     <form className="flex w-full flex-col gap-2">
       <div className="flex justify-around">
         <Filter
-          filterField="energyLevel"
-          options={[{ value: 'Low' }, { value: 'Moderate' }, { value: 'High' }]}
-        />
-        <Filter
           filterField="size"
           options={[
             { value: 'Small' },
             { value: 'Medium' },
             { value: 'Large' },
           ]}
+        />
+        <Filter
+          filterField="energyLevel"
+          options={[{ value: 'Low' }, { value: 'Moderate' }, { value: 'High' }]}
         />
       </div>
       <div className="flex justify-around">

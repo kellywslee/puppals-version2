@@ -18,7 +18,8 @@ const DogList = () => {
     // Apply search filter
     if (
       searchQuery &&
-      !dog.name.toLowerCase().includes(searchQuery.toLowerCase())
+      !dog.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      !dog.breed.toLowerCase().includes(searchQuery.toLowerCase())
     ) {
       return false;
     }
