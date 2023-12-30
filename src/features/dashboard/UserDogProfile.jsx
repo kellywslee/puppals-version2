@@ -1,4 +1,5 @@
 import { toast } from 'react-hot-toast';
+import { Hearts } from 'react-loader-spinner';
 import { BsCircleFill } from 'react-icons/bs';
 import { useUser } from '../../hooks/useAuth';
 import { useMyDog } from '../../hooks/useDogs';
@@ -8,15 +9,13 @@ import {
   calculateAge,
 } from '../../utils/helpers';
 import EditProfile from './EditProfile';
-import Spinner from '../../ui/Spinner';
 
 const UserDogProfile = () => {
   const { user } = useUser();
   const { myDog, isLoading, error } = useMyDog(user?.id);
-  if (!user) return <Spinner />;
 
-  if (isLoading) return <Spinner />;
-
+  if (!user) return <Hearts color="#ffbf69" />;
+  if (isLoading) return <Hearts color="#ffbf69" />;
   if (error) return toast.error('Error fetching dog profile');
 
   const defaultDogData = {

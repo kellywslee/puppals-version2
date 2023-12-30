@@ -1,5 +1,5 @@
 PupPals - Version 2
 
-- React
+- React: TanStack React Query for state management
 - Supabase
 - Tailwind
