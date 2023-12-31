@@ -62,7 +62,10 @@ const Map = () => {
   return (
     <div className="relative w-full">
       {!geolocationPosition && (
-        <button onClick={getPosition} className="absolute left-1/2 z-50">
+        <button
+          onClick={getPosition}
+          className="absolute bottom-4 left-[40%] z-50 rounded-lg border-4 border-org bg-slate-50 p-1 text-xs"
+        >
           {isLoadingPosition ? 'Loading...' : 'Use my location'}
         </button>
       )}

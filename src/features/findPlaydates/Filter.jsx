@@ -42,7 +42,7 @@ const Filter = ({ filterField, options }) => {
   };
 
   return (
-    <fieldset className="flex rounded-lg border-none p-1">
+    <fieldset className="flex w-1/2 rounded-lg border-none p-1">
       <legend className="mb-1 text-sm font-semibold">
         {camelToTitle(filterField)}
       </legend>

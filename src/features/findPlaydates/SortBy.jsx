@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import Select from './Select';
 
+// eslint-disable-next-line react/prop-types
 const SortBy = ({ options }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get('sortBy') || '';

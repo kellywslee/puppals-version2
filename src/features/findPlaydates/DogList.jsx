@@ -64,7 +64,7 @@ const DogList = () => {
   });
 
   return (
-    <section className="flex h-44 w-full flex-col gap-2 overflow-auto">
+    <section className="flex h-44 w-full flex-col gap-2 overflow-auto md:h-96">
       {filteredDogs.length ? (
         filteredDogs.map((dog) => <MiniProfile key={dog.id} dog={dog} />)
       ) : (
