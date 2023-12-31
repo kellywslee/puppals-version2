@@ -16,3 +16,35 @@
     @apply font-bold;
   }
 }
+
+.leaflet-container {
+  height: 300px;
+  width: 100%;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: white;
+  border: 3px solid #ffbf69;
+}
+
+.leaflet-popup-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+
+  font-family: 'Gabarito', sans-serif;
+  font-size: 0.8rem;
+  height: 1.5rem;
+}
+
+.leaflet-popup-content img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  background-color: #ffbf69;
+}

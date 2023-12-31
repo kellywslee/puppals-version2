@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
-import { Hearts } from 'react-loader-spinner';
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
 import { useMyDog } from '../../hooks/useDogs';
 import { useAllDogs } from '../../hooks/useDogs';
 import MiniProfile from './MiniProfile';
+import Loader from '../../ui/Loader';
 
 const DogList = () => {
   const { user } = useUser();
@@ -26,18 +26,7 @@ const DogList = () => {
   const sizeFilters = searchParams.get('size')?.split(',') || [];
   const energyLevelFilters = searchParams.get('energyLevel')?.split(',') || [];
 
-  if (isLoadingMyDog || isLoadingAllDogs)
-    return (
-      <Hearts
-        color="#ffbf69"
-        wrapperStyle={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      />
-    );
+  if (isLoadingMyDog || isLoadingAllDogs) return <Loader />;
   if (errorMyDog || errorAllDogs) {
     toast.error('Error loading dogs');
     return null;
@@ -75,7 +64,7 @@ const DogList = () => {
   });
 
   return (
-    <section className="flex w-full flex-col gap-2 overflow-auto">
+    <section className="flex h-44 w-full flex-col gap-2 overflow-auto">
       {filteredDogs.length ? (
         filteredDogs.map((dog) => <MiniProfile key={dog.id} dog={dog} />)
       ) : (

@@ -8,8 +8,8 @@ const FindPlaydates = () => {
       <h1>Find Playdates!</h1>
       <SearchOperation />
       <section className="flex w-full flex-col gap-2">
-        <Outlet />
         <Map />
+        <Outlet />
       </section>
     </main>
   );

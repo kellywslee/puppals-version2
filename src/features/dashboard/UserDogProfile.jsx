@@ -1,38 +1,17 @@
 import { toast } from 'react-hot-toast';
-import { Hearts } from 'react-loader-spinner';
+
 import { useUser } from '../../hooks/useAuth';
 import { useMyDog } from '../../hooks/useDogs';
 import EditProfile from './EditProfile';
 import ProfileCard from '../../ui/ProfileCard';
+import Loader from '../../ui/Loader';
 
 const UserDogProfile = () => {
   const { user } = useUser();
   const { myDog, isLoading, error } = useMyDog(user?.id);
 
-  if (!user)
-    return (
-      <Hearts
-        color="#ffbf69"
-        wrapperStyle={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      />
-    );
-  if (isLoading)
-    return (
-      <Hearts
-        color="#ffbf69"
-        wrapperStyle={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      />
-    );
+  if (!user) return <Loader />;
+  if (isLoading) return <Loader />;
   if (error) return toast.error('Error fetching dog profile');
 
   const defaultDogData = {
