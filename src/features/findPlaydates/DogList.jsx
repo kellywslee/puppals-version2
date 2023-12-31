@@ -15,6 +15,9 @@ const DogList = () => {
   const searchQuery = searchParams.get('search') || '';
   const sizeFilters = searchParams.get('size')?.split(',') || [];
   const energyLevelFilters = searchParams.get('energyLevel')?.split(',') || [];
+  const sortBy = searchParams.get('sortBy');
+  const [field, direction] = sortBy.split('-');
+  const modifier = direction === 'asc' ? 1 : -1;
 
   if (isLoadingAllDogs) return <Loader />;
   if (errorAllDogs) {
@@ -53,10 +56,18 @@ const DogList = () => {
     return sizeMatch && energyLevelMatch;
   });
 
+  let sortedDogs = filteredDogs;
+  if (field === 'size')
+    sortedDogs = filteredDogs.sort((a, b) => (a[field] - b[field]) * modifier);
+  if (field === 'dateOfBirth')
+    sortedDogs = filteredDogs.sort(
+      (a, b) => (new Date(a[field]) - new Date(b[field])) * (modifier * -1),
+    );
+
   return (
     <section className="flex h-44 w-full flex-col gap-2 overflow-auto md:h-96">
-      {filteredDogs.length ? (
-        filteredDogs.map((dog) => <MiniProfile key={dog.id} dog={dog} />)
+      {sortedDogs.length ? (
+        sortedDogs.map((dog) => <MiniProfile key={dog.id} dog={dog} />)
       ) : (
         <p className="w-11/12 text-center text-sm">
           No matches found. 🥲 Try adjusting your filters.

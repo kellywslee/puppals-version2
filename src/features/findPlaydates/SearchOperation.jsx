@@ -23,11 +23,11 @@ const SearchOperation = () => {
         <Search />
         <SortBy
           options={[
-            { value: 'distance-asc', label: 'Sort by distance' },
-            { value: 'age-asc', label: 'Sort by age' },
-            { value: 'age-desc', label: 'Sort by age (desc)' },
-            { value: 'size-asc', label: 'Sort by size' },
-            { value: 'size-desc', label: 'Sort by size (desc)' },
+            { value: 'distance-asc', label: 'Sort by Closest 🐶' },
+            { value: 'dateOfBirth-asc', label: 'Puppies first' },
+            { value: 'dateOfBirth-desc', label: 'Elders first' },
+            { value: 'size-asc', label: 'Little paws 🐾 first' },
+            { value: 'size-desc', label: 'Big paws 🐾 first' },
           ]}
         />
       </div>
