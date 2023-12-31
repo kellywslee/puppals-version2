@@ -10,7 +10,7 @@ const Search = () => {
 
   return (
     <input
-      className="max-w-88 flex h-8 w-1/2 items-center rounded-lg border-1 border-gray-300 p-2 font-sans text-sm outline-slate-950 placeholder:font-sans"
+      className="flex h-8 w-1/2 max-w-96 items-center rounded-lg border-1 border-gray-300 p-2 font-sans text-sm outline-slate-950 placeholder:font-sans"
       type="search"
       placeholder="Search Dogs"
       value={searchQuery}

@@ -7,7 +7,7 @@ const FindPlaydates = () => {
     <main className="gap-2">
       <h1>Find Playdates!</h1>
       <SearchOperation />
-      <section className="flex w-full flex-col gap-2">
+      <section className="flex w-full flex-col gap-2 lg:flex-row lg:gap-4">
         <Map />
         <Outlet />
       </section>

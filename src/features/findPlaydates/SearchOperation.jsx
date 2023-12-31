@@ -4,8 +4,8 @@ import SortBy from './SortBy';
 
 const SearchOperation = () => {
   return (
-    <form className="flex w-full flex-col gap-2">
-      <div className="flex justify-around gap-2 md:justify-start">
+    <form className="lg:flex-end flex w-full flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+      <div className="flex justify-around gap-2 md:justify-start lg:w-1/2 lg:justify-between">
         <Filter
           filterField="size"
           options={[
@@ -19,7 +19,7 @@ const SearchOperation = () => {
           options={[{ value: 'Low' }, { value: 'Moderate' }, { value: 'High' }]}
         />
       </div>
-      <div className="flex justify-between gap-2">
+      <div className="flex justify-between gap-2 lg:w-1/2">
         <Search />
         <SortBy
           options={[
