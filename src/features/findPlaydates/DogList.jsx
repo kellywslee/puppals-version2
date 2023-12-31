@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { useAllDogs } from '../../hooks/useDogs';
+import { useUser } from '../../hooks/useAuth';
+import { useAllDogs, useMyDog } from '../../hooks/useDogs';
 import { calDistance } from '../../utils/helpers';
 import MiniProfile from './MiniProfile';
 import Loader from '../../ui/Loader';
@@ -11,6 +12,12 @@ const DogList = () => {
     isLoading: isLoadingAllDogs,
     error: errorAllDogs,
   } = useAllDogs();
+  const { user } = useUser();
+  const {
+    myDog,
+    isLoading: isLoadingMyDog,
+    error: errorMyDog,
+  } = useMyDog(user?.id);
 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
@@ -28,10 +35,19 @@ const DogList = () => {
 
   const userLat = searchParams.get('lat');
   const userLng = searchParams.get('lng');
-  const originCoordinates =
-    userLat && userLng
-      ? [parseFloat(userLat), parseFloat(userLng)]
-      : [43.64, -79.4];
+  let originCoordinates;
+
+  if (myDog && myDog.length > 0 && myDog[0].lat && myDog[0].lng) {
+    // Use the user's dog's location
+    originCoordinates = [myDog[0].lat, myDog[0].lng];
+  } else if (userLat && userLng) {
+    // Use user's geolocation from URL params
+    originCoordinates = [parseFloat(userLat), parseFloat(userLng)];
+  } else {
+    // Default coordinates
+    originCoordinates = [43.64, -79.4];
+  }
+
   const dogsWithDistance = dogs
     ? dogs.map((dog) => ({
         ...dog,
