@@ -3,10 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { Icon } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { toast } from 'react-hot-toast';
-import { useAllDogs } from '../../hooks/useDogs';
+import { useUser } from '../../hooks/useAuth';
+import { useAllDogs, useMyDog } from '../../hooks/useDogs';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import Loader from '../../ui/Loader';
 import 'leaflet/dist/leaflet.css';
+import { set } from 'react-hook-form';
 
 const Map = () => {
   const {
@@ -14,6 +16,12 @@ const Map = () => {
     isLoading: isLoadingAllDogs,
     error: errorAllDogs,
   } = useAllDogs();
+  const { user } = useUser();
+  const {
+    myDog,
+    isLoading: isLoadingMyDog,
+    error: errorMyDog,
+  } = useMyDog(user?.id);
   const [mapPosition, setMapPosition] = useState([43.64, -79.4]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -37,16 +45,19 @@ const Map = () => {
   }, [geolocationPosition, setSearchParams]);
 
   useEffect(() => {
-    if (mapLat && mapLng) {
-      setMapPosition([parseFloat(mapLat), parseFloat(mapLng)]);
-    } else if (geolocationPosition) {
+    if (geolocationPosition) {
       setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
-      updateSearchParamsWithLocation(); // Update search params when geolocationPosition is available
+      updateSearchParamsWithLocation();
+    } else if (mapLat && mapLng) {
+      setMapPosition([parseFloat(mapLat), parseFloat(mapLng)]);
+    } else if (myDog && myDog.length > 0 && myDog[0].lat && myDog[0].lng) {
+      setMapPosition([myDog[0].lat, myDog[0].lng]);
     }
   }, [
     geolocationPosition,
     mapLat,
     mapLng,
+    myDog,
     setSearchParams,
     updateSearchParamsWithLocation,
   ]);
@@ -58,8 +69,8 @@ const Map = () => {
     return null;
   };
 
-  if (isLoadingAllDogs) return <Loader />;
-  if (errorAllDogs) {
+  if (isLoadingAllDogs || (user && isLoadingMyDog)) return <Loader />;
+  if (errorAllDogs || (user && errorMyDog) || !dogs) {
     toast.error('Error loading dogs');
     return null;
   }
@@ -96,7 +107,7 @@ const Map = () => {
             </Popup>
           </Marker>
         ))}
-        {mapPosition && <ChangeCenter position={mapPosition} />}
+        <ChangeCenter position={mapPosition} />
       </MapContainer>
     </div>
   );

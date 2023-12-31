@@ -27,25 +27,20 @@ const DogList = () => {
   const [field, direction] = sortBy ? sortBy.split('-') : [null, null];
   const modifier = direction === 'asc' ? 1 : -1;
 
-  if (isLoadingAllDogs) return <Loader />;
-  if (errorAllDogs || !dogs) {
+  if (isLoadingAllDogs || (user && isLoadingMyDog)) return <Loader />;
+  if (errorAllDogs || (user && errorMyDog) || !dogs) {
     toast.error('Error loading dogs');
     return null;
   }
 
   const userLat = searchParams.get('lat');
   const userLng = searchParams.get('lng');
-  let originCoordinates;
+  let originCoordinates = [43.64, -79.4];
 
-  if (myDog && myDog.length > 0 && myDog[0].lat && myDog[0].lng) {
-    // Use the user's dog's location
-    originCoordinates = [myDog[0].lat, myDog[0].lng];
-  } else if (userLat && userLng) {
-    // Use user's geolocation from URL params
+  if (userLat && userLng) {
     originCoordinates = [parseFloat(userLat), parseFloat(userLng)];
-  } else {
-    // Default coordinates
-    originCoordinates = [43.64, -79.4];
+  } else if (myDog && myDog.length > 0 && myDog[0].lat && myDog[0].lng) {
+    originCoordinates = [myDog[0].lat, myDog[0].lng];
   }
 
   const dogsWithDistance = dogs
