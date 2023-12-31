@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Icon } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
@@ -8,7 +7,6 @@ import { useAllDogs, useMyDog } from '../../hooks/useDogs';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import Loader from '../../ui/Loader';
 import 'leaflet/dist/leaflet.css';
-import { set } from 'react-hook-form';
 
 const Map = () => {
   const {

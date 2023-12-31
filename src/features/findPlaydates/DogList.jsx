@@ -43,8 +43,13 @@ const DogList = () => {
     originCoordinates = [myDog[0].lat, myDog[0].lng];
   }
 
-  const dogsWithDistance = dogs
-    ? dogs.map((dog) => ({
+  // Exclude user's dog from the list if the user is logged in and has a dog
+  const filteredDogsList = dogs.filter(
+    (dog) => !user || !myDog || !myDog.some((userDog) => userDog.id === dog.id),
+  );
+
+  const dogsWithDistance = filteredDogsList
+    ? filteredDogsList.map((dog) => ({
         ...dog,
         distance: parseFloat(
           calDistance(originCoordinates, [dog.lat, dog.lng]),
