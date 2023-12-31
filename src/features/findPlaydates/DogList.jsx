@@ -1,33 +1,23 @@
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { useUser } from '../../hooks/useAuth';
-import { useMyDog } from '../../hooks/useDogs';
 import { useAllDogs } from '../../hooks/useDogs';
 import MiniProfile from './MiniProfile';
 import Loader from '../../ui/Loader';
 
 const DogList = () => {
-  const { user } = useUser();
-  const {
-    myDog,
-    isLoading: isLoadingMyDog,
-    error: errorMyDog,
-  } = useMyDog(user?.id);
-
-  const currentUserDogId = myDog && myDog.length > 0 ? myDog[0].id : null;
   const {
     dogs,
     isLoading: isLoadingAllDogs,
     error: errorAllDogs,
-  } = useAllDogs(currentUserDogId);
+  } = useAllDogs();
 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
   const sizeFilters = searchParams.get('size')?.split(',') || [];
   const energyLevelFilters = searchParams.get('energyLevel')?.split(',') || [];
 
-  if (isLoadingMyDog || isLoadingAllDogs) return <Loader />;
-  if (errorMyDog || errorAllDogs) {
+  if (isLoadingAllDogs) return <Loader />;
+  if (errorAllDogs) {
     toast.error('Error loading dogs');
     return null;
   }

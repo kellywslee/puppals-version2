@@ -1,29 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Icon } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { toast } from 'react-hot-toast';
-import { useUser } from '../../hooks/useAuth';
-import { useAllDogs, useMyDog } from '../../hooks/useDogs';
+import { useAllDogs } from '../../hooks/useDogs';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import Loader from '../../ui/Loader';
 import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
-  const { user } = useUser();
-  const {
-    myDog,
-    isLoading: isLoadingMyDog,
-    error: errorMyDog,
-  } = useMyDog(user?.id);
-  const currentUserDogId = myDog && myDog.length > 0 ? myDog[0].id : null;
   const {
     dogs,
     isLoading: isLoadingAllDogs,
     error: errorAllDogs,
-  } = useAllDogs(currentUserDogId);
-  const [mapPosition, setMapPosition] = useState([43.67, -79.38]);
-  const [searchParams] = useSearchParams();
+  } = useAllDogs();
+  const [mapPosition, setMapPosition] = useState([43.64, -79.4]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
@@ -33,6 +26,31 @@ const Map = () => {
   const mapLat = searchParams.get('lat');
   const mapLng = searchParams.get('lng');
 
+  const updateSearchParamsWithLocation = useCallback(() => {
+    if (geolocationPosition) {
+      // Create a new URLSearchParams object to update the search params
+      const params = new URLSearchParams();
+      params.set('lat', geolocationPosition.lat);
+      params.set('lng', geolocationPosition.lng);
+      setSearchParams(params); // Update the search params in the URL
+    }
+  }, [geolocationPosition, setSearchParams]);
+
+  useEffect(() => {
+    if (mapLat && mapLng) {
+      setMapPosition([parseFloat(mapLat), parseFloat(mapLng)]);
+    } else if (geolocationPosition) {
+      setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+      updateSearchParamsWithLocation(); // Update search params when geolocationPosition is available
+    }
+  }, [
+    geolocationPosition,
+    mapLat,
+    mapLng,
+    setSearchParams,
+    updateSearchParamsWithLocation,
+  ]);
+
   // eslint-disable-next-line react/prop-types
   const ChangeCenter = ({ position }) => {
     const map = useMap();
@@ -40,21 +58,8 @@ const Map = () => {
     return null;
   };
 
-  useEffect(() => {
-    // If there's a latitude and longitude in the search parameters, use that
-    if (mapLat && mapLng) {
-      setMapPosition([parseFloat(mapLat), parseFloat(mapLng)]);
-    } else if (myDog && myDog.length > 0) {
-      // If myDog is defined and has elements, set the map position
-      setMapPosition([myDog[0].lat, myDog[0].lng]);
-    } else if (geolocationPosition) {
-      // Fallback to geolocation position if available
-      setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
-    }
-  }, [mapLat, mapLng, myDog, geolocationPosition]);
-
-  if (isLoadingMyDog || isLoadingAllDogs) return <Loader />;
-  if (errorMyDog || errorAllDogs) {
+  if (isLoadingAllDogs) return <Loader />;
+  if (errorAllDogs) {
     toast.error('Error loading dogs');
     return null;
   }
@@ -63,15 +68,18 @@ const Map = () => {
     <div className="relative w-full">
       {!geolocationPosition && (
         <button
-          onClick={getPosition}
-          className="absolute bottom-4 left-[40%] z-50 rounded-lg border-4 border-org bg-slate-50 p-1 text-xs"
+          onClick={() => {
+            getPosition();
+            updateSearchParamsWithLocation();
+          }}
+          className="absolute bottom-3 left-3 z-50 rounded-lg border-2 border-slate-950 bg-org p-1 text-xs font-bold"
         >
-          {isLoadingPosition ? 'Loading...' : 'Use my location'}
+          {isLoadingPosition ? 'Loading...' : 'Use my location 🔍'}
         </button>
       )}
       <MapContainer
         center={mapPosition}
-        zoom={14}
+        zoom={12}
         scrollWheelZoom={true}
         className="z-0"
       >

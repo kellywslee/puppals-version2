@@ -1,10 +1,7 @@
 import supabase, { supabaseUrl } from './supabase';
 
-export const getDogs = async (currentUserDogId) => {
-  const { data, error } = await supabase
-    .from('dog')
-    .select('*')
-    .not('id', 'eq', currentUserDogId);
+export const getDogs = async () => {
+  const { data, error } = await supabase.from('dog').select('*');
 
   if (error) {
     console.error(error);
