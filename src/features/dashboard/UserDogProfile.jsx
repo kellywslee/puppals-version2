@@ -33,7 +33,7 @@ const UserDogProfile = () => {
 
   return (
     <section className="mb-4 flex w-11/12 flex-col items-center justify-center rounded-lg border-2 p-3 lg:p-4">
-      <div className="mb-2 flex w-full flex-row justify-between lg:w-3/4">
+      <div className="mb-2 flex w-full flex-row items-center justify-between lg:w-3/4">
         <h2 className="mb-2 text-base md:text-lg lg:text-xl">
           My Dog&apos;s Profile
         </h2>

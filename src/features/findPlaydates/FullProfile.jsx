@@ -1,13 +1,11 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import {
-  capFirstLowerRest,
-  capitalizeAllLetters,
-  calculateAge,
-} from '../../utils/helpers';
+import { useUser } from '../../hooks/useAuth';
+import { capFirstLowerRest, calculateAge } from '../../utils/helpers';
 import { ImCross } from 'react-icons/im';
 import { BsCircleFill } from 'react-icons/bs';
-import { useDog } from '../../hooks/useDogs';
+import { useDog, useMyDog } from '../../hooks/useDogs';
+import { calDistance } from '../../utils/helpers';
 import Loader from '../../ui/Loader';
 import Button from '../../ui/Button';
 
@@ -15,9 +13,36 @@ const FullProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { dog, isLoading, error } = useDog(id);
+  const { user } = useUser();
+  const {
+    myDog,
+    isLoading: isLoadingMyDog,
+    error: errorMyDog,
+  } = useMyDog(user?.id);
+  const [searchParams] = useSearchParams();
 
-  if (isLoading) return <Loader />;
-  if (error) return toast.error('Error fetching dog profile');
+  if (isLoading || (user && isLoadingMyDog)) return <Loader />;
+  if (error || (user && errorMyDog) || !dog) {
+    toast.error('Error loading dogs');
+    return null;
+  }
+
+  const userLat = searchParams.get('lat');
+  const userLng = searchParams.get('lng');
+  let originCoordinates = [43.64, -79.4];
+
+  if (userLat && userLng) {
+    originCoordinates = [parseFloat(userLat), parseFloat(userLng)];
+  } else if (myDog && myDog.length > 0 && myDog[0].lat && myDog[0].lng) {
+    originCoordinates = [myDog[0].lat, myDog[0].lng];
+  }
+
+  const dogWithDistance = {
+    ...dog,
+    distance: parseFloat(
+      calDistance(originCoordinates, [dog.lat, dog.lng]),
+    ).toFixed(1),
+  };
 
   return (
     <article className="flex items-center justify-center md:mt-2 lg:mt-0 lg:w-1/2">
@@ -37,8 +62,9 @@ const FullProfile = () => {
             className="transition:all absolute right-4 top-4 z-50 text-sm hover:cursor-pointer hover:text-org"
             onClick={(e) => {
               e.preventDefault();
-              navigate(-1);
+              navigate('/findplaydates');
             }}
+            aria-label="Close profile view"
           />
         </li>
         <li className="col-span-3 flex items-center">
@@ -49,7 +75,7 @@ const FullProfile = () => {
         </li>
         <li>{dog.sex}</li>
         <li>{calculateAge(dog.dateOfBirth)}</li>
-        <li>{capitalizeAllLetters(dog.postalCode)}</li>
+        <li>{dogWithDistance.distance} km</li>
         <li className="col-span-2">
           <Button type="primary">Follow</Button>
         </li>

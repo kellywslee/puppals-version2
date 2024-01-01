@@ -3,10 +3,12 @@ import UserDogProfile from '../features/dashboard/UserDogProfile';
 
 const Dashboard = () => {
   return (
-    <main className="gap-3">
+    <main className="gap-2">
       <h1>Dashboard</h1>
-      <StatusBoard />
-      <UserDogProfile />
+      <div className="flex flex-col items-center justify-center gap-2 lg:flex">
+        <StatusBoard />
+        <UserDogProfile />
+      </div>
     </main>
   );
 };

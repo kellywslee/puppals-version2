@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ProfileForm from './ProfileForm';
 import Modal from '../../ui/Modal';
+import Button from '../../ui/Button';
 
 // eslint-disable-next-line react/prop-types
 const EditProfile = ({ dogToEdit }) => {
@@ -8,12 +9,9 @@ const EditProfile = ({ dogToEdit }) => {
 
   return (
     <>
-      <button
-        onClick={() => setModalOpen((show) => !show)}
-        className="mb-2 h-auto w-auto rounded-lg bg-org px-2 py-1 text-sm font-semibold transition-all duration-300 hover:bg-orange-400 hover:font-bold md:text-base"
-      >
+      <Button onClick={() => setModalOpen((show) => !show)} type="edit">
         Edit Profile
-      </button>
+      </Button>
       {isModalOpen && (
         <Modal title="Update Profile" onClose={() => setModalOpen(false)}>
           <ProfileForm

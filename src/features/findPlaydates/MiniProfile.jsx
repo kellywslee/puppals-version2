@@ -4,7 +4,9 @@ import { calculateAge } from '../../utils/helpers';
 
 const MiniProfile = ({ dog }) => {
   return (
-    <Link to={`/findplaydates/dogs/${dog.id}?lat=${dog.lat}&lng=${dog.lng}`}>
+    <Link
+      to={`/findplaydates/dogs/${dog.id}?dogLat=${dog.lat}&dogLng=${dog.lng}`}
+    >
       <ul className="grid w-full grid-cols-profile grid-rows-3 rounded-lg border-1 border-gray-300 p-2 text-xs hover:border-org">
         <li className="row-span-3 place-self-center">
           <img

@@ -30,8 +30,8 @@ const Map = () => {
     getPosition,
   } = useGeolocation();
 
-  const mapLat = searchParams.get('lat');
-  const mapLng = searchParams.get('lng');
+  const mapLat = searchParams.get('dogLat');
+  const mapLng = searchParams.get('dogLng');
 
   const updateSearchParamsWithLocation = useCallback(() => {
     if (geolocationPosition) {
@@ -71,7 +71,10 @@ const Map = () => {
   const navigate = useNavigate();
 
   const handleMarkerClick = (dog) => {
-    navigate(`/findplaydates/dogs/${dog.id}?lat=${dog.lat}&lng=${dog.lng}`);
+    setMapPosition([dog.lat, dog.lng]);
+    navigate(
+      `/findplaydates/dogs/${dog.id}?dogLat=${dog.lat}&dogLng=${dog.lng}`,
+    );
   };
 
   if (isLoadingAllDogs || (user && isLoadingMyDog)) return <Loader />;

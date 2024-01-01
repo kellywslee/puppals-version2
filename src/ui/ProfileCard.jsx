@@ -9,7 +9,7 @@ import { BsCircleFill } from 'react-icons/bs';
 // eslint-disable-next-line react/prop-types
 const ProfileCard = ({ dog }) => {
   return (
-    <ul className="md:grid-cols-fullProfile grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-1 rounded-lg border-2 p-2 text-sm md:gap-x-12 md:p-4 md:text-base lg:w-3/4 lg:gap-y-1">
+    <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-1 rounded-lg border-2 p-2 text-sm md:grid-cols-fullProfile md:gap-x-12 md:p-4 md:text-base lg:w-3/4 lg:gap-y-1">
       <li className="col-span-2 row-span-3 place-self-center md:col-span-1 md:row-span-6">
         <img
           src={dog.image}
