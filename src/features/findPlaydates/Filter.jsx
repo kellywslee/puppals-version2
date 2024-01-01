@@ -61,11 +61,11 @@ const Filter = ({ filterField, options }) => {
                   ? sizeToWeightQuery[option.value]
                   : option.value,
               )}
-            className="h-3 w-3 rounded-lg border-slate-950 accent-org focus:ring-teal-600"
+            className="h-3 w-3 rounded-lg border-slate-950 accent-org focus:ring-slate-950 lg:h-4 lg:w-4 lg:rounded-xl lg:border-2 "
           />
           <label
             htmlFor={`${filterField}-${option.value}`}
-            className="ml-1 mr-1 text-xs"
+            className="ml-1 mr-1 text-xs lg:ml-2 lg:mr-2 lg:text-sm"
           >
             {option.value}
           </label>

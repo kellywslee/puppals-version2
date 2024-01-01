@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
@@ -68,6 +68,12 @@ const Map = () => {
     return null;
   };
 
+  const navigate = useNavigate();
+
+  const handleMarkerClick = (dog) => {
+    navigate(`/findplaydates/dogs/${dog.id}?lat=${dog.lat}&lng=${dog.lng}`);
+  };
+
   if (isLoadingAllDogs || (user && isLoadingMyDog)) return <Loader />;
   if (errorAllDogs || (user && errorMyDog) || !dogs) {
     toast.error('Error loading dogs');
@@ -99,7 +105,13 @@ const Map = () => {
         />
 
         {dogs.map((dog) => (
-          <Marker position={[dog.lat, dog.lng]} key={dog.id}>
+          <Marker
+            position={[dog.lat, dog.lng]}
+            key={dog.id}
+            eventHandlers={{
+              click: () => handleMarkerClick(dog),
+            }}
+          >
             <Popup>
               <img src={dog.image} alt={`${dog.name} the ${dog.breed} dog`} />
               <span>{dog.name}</span>
