@@ -11,7 +11,7 @@ const Button = ({ children, disabled, type, onClick }) => {
     special:
       base +
       ' rounded-xl border-2 border-slate-950 px-3 py-2 tracking-wide  shadow-sp shadow-slate-950  active:translate-y-1 active:shadow-none',
-    edit: base + ' text-xs rounded-lg p-1',
+    edit: base + ' text-xs rounded-lg p-1 w-full',
   };
   return (
     <button

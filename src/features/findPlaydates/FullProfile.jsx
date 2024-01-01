@@ -46,7 +46,7 @@ const FullProfile = () => {
 
   return (
     <article className="flex items-center justify-center md:mt-2 lg:mt-0 lg:w-1/2">
-      <ul className="relative grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-1 rounded-lg border-2 p-2 text-sm md:w-2/3 lg:h-full lg:w-full">
+      <ul className="relative grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-1 rounded-lg border-2 p-2 text-sm md:w-2/3 lg:h-full lg:w-full lg:p-8">
         <li className="col-span-2 row-span-3 place-self-center ">
           <img
             src={dog.image}

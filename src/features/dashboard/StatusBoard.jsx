@@ -1,19 +1,21 @@
 import { GoMail } from 'react-icons/go';
 import { LiaUserFriendsSolid } from 'react-icons/lia';
 import { PiDogFill, PiDog } from 'react-icons/pi';
+import { CgProfile } from 'react-icons/cg';
+import { IoSettingsOutline } from 'react-icons/io5';
 
 const StatusBoard = () => {
   const list = [
-    { id: 1, name: 'Profile', icon: <GoMail /> },
-    { id: 2, name: 'Messages', icon: <GoMail /> },
-    { id: 3, name: 'Groups', icon: <LiaUserFriendsSolid /> },
-    { id: 4, name: 'Followers', icon: <PiDogFill /> },
-    { id: 5, name: 'Following', icon: <PiDog /> },
-    { id: 6, name: 'Setting', icon: <PiDog /> },
+    { id: 1, name: 'Messages', icon: <GoMail /> },
+    { id: 2, name: 'Groups', icon: <LiaUserFriendsSolid /> },
+    { id: 3, name: 'Followers', icon: <PiDogFill /> },
+    { id: 4, name: 'Following', icon: <PiDog /> },
+    { id: 5, name: 'Profile', icon: <CgProfile /> },
+    { id: 6, name: 'Setting', icon: <IoSettingsOutline /> },
   ];
   return (
-    <section className="w-11/12 rounded-lg border-2 p-3 text-xs lg:w-1/4">
-      <ul className="grid grid-cols-2 gap-1 md:grid-cols-4 lg:grid-cols-1 lg:gap-2">
+    <section className="md:border-right w-full rounded-lg border-2 p-3 text-xs md:w-1/4 md:border-none">
+      <ul className="grid grid-cols-2 gap-1 md:grid-cols-1">
         {list.map((item) => (
           <li
             key={item.id}
