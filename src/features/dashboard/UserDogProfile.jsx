@@ -37,12 +37,12 @@ const UserDogProfile = () => {
   const dogData = myDog[0] || defaultDogData;
 
   return (
-    <section className="mb-4 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-2 p-3 md:mb-0 md:flex-row md:items-center md:border-none">
+    <section className="mb-4 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-1 p-3 md:mb-0 md:flex-row md:items-center md:border-none lg:gap-6">
       <h2 className="text-base md:text-center md:text-lg lg:text-xl">
         My Dog&apos;s Profile
       </h2>
-      <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-1 rounded-lg border-2 p-2 text-xs md:w-3/4 md:p-4">
-        <li className="col-span-2 row-span-4 place-self-center">
+      <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-3 gap-y-1 rounded-lg border-1 p-2 text-xs md:w-3/4 md:p-4 lg:text-sm">
+        <li className="col-span-1 row-span-4 place-self-start">
           <img
             src={dogData.image}
             alt={`${dogData.name} the ${dogData.breed} dog`}
@@ -52,7 +52,7 @@ const UserDogProfile = () => {
         <li className="col-span-3 text-lg font-bold">
           {capFirstLowerRest(dogData.name)}
         </li>
-        <li className="items-cente col-span-3 flex">
+        <li className="col-span-3 flex items-center">
           <BsCircleFill
             className={`${
               dogData.isActive ? 'text-green2' : 'text-red-600'
@@ -66,23 +66,23 @@ const UserDogProfile = () => {
         <li className="col-span-3">
           {capitalizeAllLetters(dogData.postalCode)}
         </li>
-        <li className="col-span-2">
+        <li className="col-span-1 flex items-center justify-start">
           <EditProfile dogToEdit={myDog[0]} />
         </li>
         <li className="col-span-3 ">
           <span className="font-bold">Energy Level: </span>
           {dogData.energyLevel}
         </li>
-        <li className="col-span-5 overflow-hidden ">
+        <li className="col-span-4 overflow-hidden ">
           <span className="font-bold">Breed: </span>
           {dogData.breed}
         </li>
 
-        <li className="col-span-5 ">
+        <li className="col-span-4 ">
           <span className="font-bold">Name of Pawrents: </span>
           {capFirstLowerRest(dogData.nameOfPawrents)}
         </li>
-        <li className="col-span-5 ">
+        <li className="col-span-4 ">
           <span className="font-bold">Message: </span>
           {dogData.message}
         </li>

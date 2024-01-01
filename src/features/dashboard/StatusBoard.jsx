@@ -14,17 +14,17 @@ const StatusBoard = () => {
     { id: 6, name: 'Setting', icon: <IoSettingsOutline /> },
   ];
   return (
-    <section className="md:border-right w-full rounded-lg border-2 p-3 text-xs md:w-1/4 md:border-none">
+    <section className="w-full rounded-lg border-1 p-3 text-xs md:w-1/4 ">
       <ul className="grid grid-cols-2 gap-1 md:grid-cols-1">
         {list.map((item) => (
           <li
             key={item.id}
             className="flex items-center justify-center rounded-lg bg-gray-200 p-2"
           >
-            <span className="mr-2 text-lg md:text-xl lg:text-2xl">
+            <span className="mr-2 flex w-1/3 justify-center text-lg md:text-xl lg:text-2xl">
               {item.icon}
             </span>
-            <p>{item.name}</p>
+            <p className="w-1/2 text-left lg:text-sm">{item.name}</p>
           </li>
         ))}
       </ul>

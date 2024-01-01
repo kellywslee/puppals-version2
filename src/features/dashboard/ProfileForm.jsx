@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useUser } from '../../hooks/useAuth';
 import { useCreateDog, useEditDog } from '../../hooks/useDogs';
+import Button from '../../ui/Button';
 
 // eslint-disable-next-line react/prop-types
 const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
@@ -320,7 +321,7 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
         })}
         disabled={isWorking}
         aria-invalid={errors.isActive ? 'true' : 'false'}
-        className="h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
+        className="mb-2 h-10 w-full bg-white p-2 font-sans text-sm outline-slate-950"
       >
         <option value=""></option>
         <option value="true">Yes</option>
@@ -333,15 +334,10 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
       )}
 
       <div className="flex gap-1">
-        <button
-          onClick={onCloseModal}
-          className="m-2 h-12 w-full rounded-lg border-2 border-org p-2 font-bold transition-all  hover:bg-orange-400"
-        >
+        <Button onClick={onCloseModal} type="outline">
           Cancel
-        </button>
-        <button className="m-2 h-12 w-full rounded-lg bg-org p-2 font-bold transition-all hover:bg-orange-400 ">
-          Edit
-        </button>
+        </Button>
+        <Button type="profileEdit">Edit</Button>
       </div>
     </form>
   );
