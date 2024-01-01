@@ -1,5 +1,5 @@
 const Followers = () => {
-  return <div>Followers</div>;
+  return <section>Followers</section>;
 };
 
 export default Followers;

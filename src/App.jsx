@@ -6,9 +6,11 @@ import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import Faq from './pages/Faq';
 import Dashboard from './pages/Dashboard';
-import Inbox from './pages/Inbox';
-import Groups from './pages/Groups';
-import Playdates from './pages/Playdates';
+import Messages from './features/messages/Messages';
+import Groups from './features/groups/Groups';
+import UserDogProfile from './features/profile/UserDogProfile';
+import Followers from './features/playdates/Followers';
+import Following from './features/playdates/Following';
 import FindPlaydates from './pages/FindPlaydates';
 import DogList from './features/findPlaydates/DogList';
 import FullProfile from './features/findPlaydates/FullProfile';
@@ -59,41 +61,57 @@ const App = () => {
                   <Dashboard />
                 </ProtectedRoute>
               }
-            />
-
-            <Route
-              path="inbox"
-              element={
-                <ProtectedRoute>
-                  <Inbox />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="groups"
-              element={
-                <ProtectedRoute>
-                  <Groups />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="playdates"
-              element={
-                <ProtectedRoute>
-                  <Playdates />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="setting"
-              element={
-                <ProtectedRoute>
-                  <Setting />
-                </ProtectedRoute>
-              }
-            />
+            >
+              <Route index element={<Navigate replace to="messages" />} />
+              <Route
+                path="messages"
+                element={
+                  <ProtectedRoute>
+                    <Messages />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="groups"
+                element={
+                  <ProtectedRoute>
+                    <Groups />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="followers"
+                element={
+                  <ProtectedRoute>
+                    <Followers />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="following"
+                element={
+                  <ProtectedRoute>
+                    <Following />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="profile"
+                element={
+                  <ProtectedRoute>
+                    <UserDogProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="setting"
+                element={
+                  <ProtectedRoute>
+                    <Setting />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
 
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />

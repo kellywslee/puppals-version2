@@ -6,13 +6,12 @@ import SpinnerMini from './SpinnerMini';
 import Button from './Button';
 
 const menus = [
-  { id: 1, name: 'PupPals', link: '/' },
-  { id: 2, name: 'ABOUT US', link: '/aboutus' },
-  { id: 3, name: 'FAQ', link: '/faq' },
-  { id: 4, name: 'DASHBOARD', link: '/dashboard' },
-  { id: 5, name: 'FIND PLAYDATES', link: '/findplaydates' },
-  { id: 6, name: 'SETTING', link: '/setting' },
-  { id: 7, name: 'CONTACT US', link: '/contactus' },
+  { id: 1, name: 'PupPals', path: '/' },
+  { id: 2, name: 'ABOUT US', path: '/aboutus' },
+  { id: 3, name: 'FAQ', path: '/faq' },
+  { id: 4, name: 'DASHBOARD', path: '/dashboard' },
+  { id: 5, name: 'FIND PLAYDATES', path: '/findplaydates' },
+  { id: 6, name: 'CONTACT US', path: '/contactus' },
 ];
 
 const NavLoggedIn = () => {
@@ -67,7 +66,7 @@ const NavLoggedIn = () => {
                   : 'text-sm transition-all duration-300 ease-in-out hover:font-bold'
               }
             >
-              <Link to={menu.link} onClick={closeMenu}>
+              <Link to={menu.path} onClick={closeMenu}>
                 {menu.name}
               </Link>
             </li>

@@ -4,11 +4,11 @@ import Hamburger from 'hamburger-react';
 import Button from './Button';
 
 const menus = [
-  { id: 1, name: 'PupPals', link: '/' },
-  { id: 2, name: 'ABOUT US', link: '/aboutus' },
-  { id: 3, name: 'FAQ', link: '/faq' },
-  { id: 4, name: 'FIND PLAYDATES', link: '/findplaydates' },
-  { id: 5, name: 'CONTACT US', link: '/contactus' },
+  { id: 1, name: 'PupPals', path: '/' },
+  { id: 2, name: 'ABOUT US', path: '/aboutus' },
+  { id: 3, name: 'FAQ', path: '/faq' },
+  { id: 4, name: 'FIND PLAYDATES', path: '/findplaydates' },
+  { id: 5, name: 'CONTACT US', path: '/contactus' },
 ];
 
 const NavNotLoggedIn = () => {
@@ -55,7 +55,7 @@ const NavNotLoggedIn = () => {
                   : 'text-sm transition-all duration-300 ease-in-out hover:font-bold'
               }
             >
-              <Link to={menu.link} onClick={closeMenu}>
+              <Link to={menu.path} onClick={closeMenu}>
                 {menu.name}
               </Link>
             </li>
