@@ -75,7 +75,7 @@ const NavLoggedIn = () => {
         </ul>
         <ul className="lg:space-betwen flex gap-x-4">
           <li>
-            <Button onClick={handleClick}>
+            <Button onClick={handleClick} type="special">
               {!isLoading ? 'Log Out' : <SpinnerMini />}
             </Button>
           </li>

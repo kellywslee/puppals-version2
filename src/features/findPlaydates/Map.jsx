@@ -6,6 +6,7 @@ import { useUser } from '../../hooks/useAuth';
 import { useAllDogs, useMyDog } from '../../hooks/useDogs';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import Loader from '../../ui/Loader';
+import Button from '../../ui/Button';
 import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
@@ -76,15 +77,15 @@ const Map = () => {
   return (
     <div className="relative w-full">
       {!geolocationPosition && (
-        <button
+        <Button
           onClick={() => {
             getPosition();
             updateSearchParamsWithLocation();
           }}
-          className="absolute bottom-3 left-3 z-50 rounded-lg border-2 border-slate-950 bg-org p-1 text-xs font-bold"
+          type="secondary"
         >
           {isLoadingPosition ? 'Loading...' : 'Use my location 🔍'}
-        </button>
+        </Button>
       )}
       <MapContainer
         center={mapPosition}

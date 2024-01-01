@@ -64,12 +64,12 @@ const NavNotLoggedIn = () => {
         <ul className="lg:space-betwen flex gap-x-4">
           <li>
             <Link to="/login" onClick={closeMenu}>
-              <Button>Log In</Button>
+              <Button type="special">Log In</Button>
             </Link>
           </li>
           <li>
             <Link to="/signup" onClick={closeMenu}>
-              <Button>Join Us</Button>
+              <Button type="special">Join Us</Button>
             </Link>
           </li>
         </ul>

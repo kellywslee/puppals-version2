@@ -53,7 +53,7 @@ const LoginForm = () => {
         disabled={isLoading}
         error={errors.password}
       />
-      <Button type="primary">Login</Button>
+      <Button type="special">Login</Button>
       {/* {error && <p className=" text-xs text-red-600">{error.message}</p>} */}
       <div className="flex flex-col items-center gap-2 text-xs">
         <Link

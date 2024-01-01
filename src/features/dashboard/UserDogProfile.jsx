@@ -1,5 +1,4 @@
 import { toast } from 'react-hot-toast';
-
 import { useUser } from '../../hooks/useAuth';
 import { useMyDog } from '../../hooks/useDogs';
 import EditProfile from './EditProfile';

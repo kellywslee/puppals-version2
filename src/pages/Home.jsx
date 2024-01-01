@@ -20,7 +20,7 @@ const Home = () => {
           Find <span className="font-bold text-org">doggie</span> playdates!
         </h2>
         <Link to={'/findplaydates'}>
-          <Button>Start Searching</Button>
+          <Button type="special">Start Searching</Button>
         </Link>
       </section>
     </main>
