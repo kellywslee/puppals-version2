@@ -1,10 +1,11 @@
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
+import { useDog, useMyDog } from '../../hooks/useDogs';
+// import { useFollowing, useFollow, useUnfollow } from '../../hooks/useFollows';
 import { capFirstLowerRest, calculateAge } from '../../utils/helpers';
 import { ImCross } from 'react-icons/im';
 import { BsCircleFill } from 'react-icons/bs';
-import { useDog, useMyDog } from '../../hooks/useDogs';
 import { calDistance } from '../../utils/helpers';
 import Loader from '../../ui/Loader';
 import Button from '../../ui/Button';
@@ -12,16 +13,22 @@ import Button from '../../ui/Button';
 const FullProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { dog, isLoading, error } = useDog(id);
+  const { dog, isLoading: isLoadingDog, error } = useDog(id);
   const { user } = useUser();
   const {
     myDog,
     isLoading: isLoadingMyDog,
     error: errorMyDog,
   } = useMyDog(user?.id);
+  // const { followingList, isLoading: isLoadingFollowingList } = useFollowing(
+  //   myDog[0]?.id,
+  // );
+  // const { follow, isLoading: isWorking } = useFollow(myDog?.[0]?.id);
+  // const { unfollow, isLaoding: isUnfollowing } = useUnfollow(myDog?.[0]?.id);
+
   const [searchParams] = useSearchParams();
 
-  if (isLoading || (user && isLoadingMyDog)) return <Loader />;
+  if (isLoadingDog || (user && isLoadingMyDog)) return <Loader />;
   if (error || (user && errorMyDog) || !dog) {
     toast.error('Error loading dogs');
     return null;
@@ -43,6 +50,27 @@ const FullProfile = () => {
       calDistance(originCoordinates, [dog.lat, dog.lng]),
     ).toFixed(1),
   };
+
+  // const isFollowing = (dogId) =>
+  //   followingList?.some((followedDog) => followedDog?.followingDogId === dogId);
+
+  // console.log(myDog[0].id);
+  // console.log(isFollowing(dog.id));
+  // console.log(followingList);
+
+  // const toggleFollow = async (e) => {
+  //   e.preventDefault();
+  //   if (!isAuthenticated) {
+  //     toast.error('Please login to follow');
+  //     navigate('/login');
+  //     return;
+  //   }
+  //   if (isFollowing(dog.id)) {
+  //     unfollow(dog.id);
+  //   } else {
+  //     follow(dog.id);
+  //   }
+  // };
 
   return (
     <article className="flex items-center justify-center md:mt-2 lg:mt-0 lg:w-1/2">

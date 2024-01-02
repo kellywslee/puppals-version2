@@ -41,7 +41,7 @@ const NavNotLoggedIn = () => {
         ref={dropdownRef}
         className={`${
           isHambugerOpen
-            ? 'z-49 absolute right-0 top-full flex h-dvh w-full flex-col items-center justify-center gap-y-6 bg-slate-50 pb-12'
+            ? 'absolute right-0 top-full z-50 flex h-dvh w-full flex-col items-center justify-center gap-y-6 bg-slate-50 pb-12'
             : 'hidden lg:flex lg:w-11/12 lg:max-w-7xl lg:items-center lg:justify-between'
         }`}
       >
