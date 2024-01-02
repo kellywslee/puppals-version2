@@ -31,8 +31,8 @@ export const useFollow = (myDogId) => {
   const { mutate, isLoading } = useMutation({
     mutationFn: (dogId) => startFollowing(myDogId, dogId),
     onSuccess: () => {
-      queryClient.invalidateQueries(['followers']);
-      queryClient.invalidateQueries(['following']);
+      queryClient.invalidateQueries(['followers', myDogId]);
+      queryClient.invalidateQueries(['following', myDogId]);
       toast.success('Followed!');
     },
     onError: (err) => {

@@ -20,6 +20,9 @@ export const getFollowing = async (myDogId) => {
     .select('followingDogId')
     .eq('followerDogId', myDogId);
 
+  console.log('getFollowing response data:', data);
+  console.log('getFollowing error:', error);
+
   if (error) {
     console.error(error);
     throw new Error('Following could not be loaded');

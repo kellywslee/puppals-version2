@@ -2,8 +2,7 @@ import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
 import { useDog, useMyDog } from '../../hooks/useDogs';
-// import { useFollowing, useFollow, useUnfollow } from '../../hooks/useFollows';
-import { useFollow, useFollowing } from '../../hooks/useFollows';
+import { useFollow, useUnfollow, useFollowing } from '../../hooks/useFollows';
 import { capFirstLowerRest, calculateAge } from '../../utils/helpers';
 import { ImCross } from 'react-icons/im';
 import { BsCircleFill } from 'react-icons/bs';
@@ -25,13 +24,17 @@ const FullProfile = () => {
     myDog?.[0]?.id,
   );
   const { follow, isLoading: isWorking } = useFollow(myDog?.[0]?.id);
-  // const { unfollow, isLaoding: isUnfollowing } = useUnfollow(myDog?.[0]?.id);
+  const { unfollow, isLaoding: isUnfollowing } = useUnfollow(myDog?.[0]?.id);
 
   const [searchParams] = useSearchParams();
 
   if (
     isLoadingDog ||
-    (user && isLoadingMyDog && isWorking && isLoadingFollowingList)
+    (user &&
+      isLoadingMyDog &&
+      isWorking &&
+      isLoadingFollowingList &&
+      isUnfollowing)
   )
     return <Loader />;
   if (error || (user && errorMyDog) || !dog) {
@@ -56,10 +59,10 @@ const FullProfile = () => {
     ).toFixed(1),
   };
 
-  // const isFollowing = (dogId) =>
-  //   followingList?.some((followedDog) => followedDog?.followingDogId === dogId);
+  const isFollowing = (dogId) =>
+    followingList?.some((followedDog) => followedDog?.followingDogId === dogId);
 
-  console.log(myDog[0].id);
+  console.log(myDog?.[0]?.id);
   // console.log(isFollowing(dog.id));
   console.log(followingList);
 
@@ -69,14 +72,12 @@ const FullProfile = () => {
       toast.error('Please login to follow');
       navigate('/login');
       return;
+    }
+    if (isFollowing(dog.id)) {
+      unfollow(dog.id);
     } else {
       follow(dog.id);
     }
-    // if (isFollowing(dog.id)) {
-    //   unfollow(dog.id);
-    // } else {
-    //   follow(dog.id);
-    // }
   };
 
   return (
@@ -112,16 +113,18 @@ const FullProfile = () => {
         <li>{calculateAge(dog.dateOfBirth)}</li>
         <li>{dogWithDistance.distance} km</li>
         <li
-          className="col-span-1 flex justify-center"
+          className="col-span-1 flex justify-start"
           onClick={(e) => toggleFollow(e)}
         >
-          <Button type="primary">Follow</Button>
+          <Button type="primary">
+            {isFollowing(dog.id) ? 'Unfollow' : 'Follow'}
+          </Button>
         </li>
         <li className="col-span-3">
           <span className="font-bold">Weight: </span>
           {dog.size}&nbsp;lb
         </li>
-        <li className="col-span-1 flex justify-center">
+        <li className="col-span-1 flex justify-start">
           <Button type="primary">Message</Button>
         </li>
         <li className="col-span-3 overflow-hidden">
