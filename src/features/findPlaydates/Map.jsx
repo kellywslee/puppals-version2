@@ -10,17 +10,9 @@ import Button from '../../ui/Button';
 import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
-  const {
-    dogs,
-    isLoading: isLoadingAllDogs,
-    error: errorAllDogs,
-  } = useAllDogs();
+  const { dogs, isLoadingAllDogs, error: errorAllDogs } = useAllDogs();
   const { user } = useUser();
-  const {
-    myDog,
-    isLoading: isLoadingMyDog,
-    error: errorMyDog,
-  } = useMyDog(user?.id);
+  const { myDog, isLoadingMyDog, error: errorMyDog } = useMyDog(user?.id);
   const [mapPosition, setMapPosition] = useState([43.64, -79.4]);
   const [searchParams, setSearchParams] = useSearchParams();
 

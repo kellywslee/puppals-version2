@@ -7,17 +7,9 @@ import MiniProfile from './MiniProfile';
 import Loader from '../../ui/Loader';
 
 const DogList = () => {
-  const {
-    dogs,
-    isLoading: isLoadingAllDogs,
-    error: errorAllDogs,
-  } = useAllDogs();
+  const { dogs, isLoadingAllDogs, errorAllDogs } = useAllDogs();
   const { user } = useUser();
-  const {
-    myDog,
-    isLoading: isLoadingMyDog,
-    error: errorMyDog,
-  } = useMyDog(user?.id);
+  const { myDog, isLoadingMyDog, errorMyDog } = useMyDog(user?.id);
 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';

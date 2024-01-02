@@ -20,9 +20,6 @@ export const getFollowing = async (myDogId) => {
     .select('followingDogId')
     .eq('followerDogId', myDogId);
 
-  console.log('getFollowing response data:', data);
-  console.log('getFollowing error:', error);
-
   if (error) {
     console.error(error);
     throw new Error('Following could not be loaded');
@@ -31,10 +28,14 @@ export const getFollowing = async (myDogId) => {
   return data;
 };
 
-export const startFollowing = async (myDogId, dogId) => {
-  const { data, error } = await supabase
-    .from('follow')
-    .insert([{ followerDogId: myDogId, followingDogId: dogId }]);
+export const startFollowing = async ({ myDogId, dogId, userId }) => {
+  const { data, error } = await supabase.from('follow').insert([
+    {
+      followerDogId: myDogId,
+      followingDogId: dogId,
+      userId: userId,
+    },
+  ]);
 
   if (error) {
     console.error(error);

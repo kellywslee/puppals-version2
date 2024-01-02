@@ -12,7 +12,7 @@ export const useMyDog = (userId) => {
     queryKey: ['myDog', userId],
     queryFn: () => getCurrentUsersDog(userId),
   });
-  return { myDog: data, isLoading, error };
+  return { myDog: data, isLoadingMyDog: isLoading, errorMyDog: error };
 };
 
 export const useAllDogs = () => {
@@ -20,7 +20,7 @@ export const useAllDogs = () => {
     queryKey: ['dogs'],
     queryFn: () => getDogs(),
   });
-  return { dogs: data, isLoading, error };
+  return { dogs: data, isLoadingAllDogs: isLoading, errorAllDogs: error };
 };
 
 export const useDog = (dogId) => {
@@ -28,7 +28,7 @@ export const useDog = (dogId) => {
     queryKey: ['dog', dogId],
     queryFn: () => getDog(dogId),
   });
-  return { dog: data, isLoading, error };
+  return { dog: data, isLoadingDog: isLoading, errorDog: error };
 };
 
 export const useCreateDog = () => {

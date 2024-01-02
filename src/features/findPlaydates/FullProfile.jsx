@@ -13,14 +13,10 @@ import Button from '../../ui/Button';
 const FullProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { dog, isLoading: isLoadingDog, error } = useDog(id);
+  const { dog, isLoadingDog, errorDog } = useDog(id);
   const { user, isAuthenticated } = useUser();
-  const {
-    myDog,
-    isLoading: isLoadingMyDog,
-    error: errorMyDog,
-  } = useMyDog(user?.id);
-  const { followingList, isLoading: isLoadingFollowingList } = useFollowing(
+  const { myDog, isLoadingMyDog, errorMyDog } = useMyDog(user?.id);
+  const { followingList, isLoadingFollowingList } = useFollowing(
     myDog?.[0]?.id,
   );
   const { follow, isLoading: isWorking } = useFollow(myDog?.[0]?.id);
@@ -37,7 +33,7 @@ const FullProfile = () => {
       isUnfollowing)
   )
     return <Loader />;
-  if (error || (user && errorMyDog) || !dog) {
+  if (errorDog || (user && errorMyDog) || !dog) {
     toast.error('Error loading dogs');
     return null;
   }
@@ -76,7 +72,11 @@ const FullProfile = () => {
     if (isFollowing(dog.id)) {
       unfollow(dog.id);
     } else {
-      follow(dog.id);
+      follow({
+        myDogId: myDog?.[0]?.id,
+        dogId: dog.id,
+        userId: user.id,
+      });
     }
   };
 

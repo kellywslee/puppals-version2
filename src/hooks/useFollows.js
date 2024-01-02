@@ -13,7 +13,11 @@ export const useFollowers = (myDogId) => {
     queryFn: () => getFollowers(myDogId),
     enabled: !!myDogId,
   });
-  return { followersList: data, isLoading, error };
+  return {
+    followersList: data,
+    isLoadingFollowerList: isLoading,
+    errorFollowerList: error,
+  };
 };
 
 export const useFollowing = (myDogId) => {
@@ -23,16 +27,20 @@ export const useFollowing = (myDogId) => {
     enabled: !!myDogId,
   });
 
-  return { followingList: data, isLoading, error };
+  return {
+    followingList: data,
+    isLoadingFollowingList: isLoading,
+    errorFollowingList: error,
+  };
 };
 
-export const useFollow = (myDogId) => {
+export const useFollow = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation({
-    mutationFn: (dogId) => startFollowing(myDogId, dogId),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['followers', myDogId]);
-      queryClient.invalidateQueries(['following', myDogId]);
+    mutationFn: startFollowing,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(['followers', data?.followerDogId]);
+      queryClient.invalidateQueries(['following', data?.followerDogId]);
       toast.success('Followed!');
     },
     onError: (err) => {
