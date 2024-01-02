@@ -75,7 +75,7 @@ const UserDogProfile = () => {
         </li>
         <li className="col-span-4 overflow-hidden ">
           <span className="font-bold">Breed: </span>
-          {dogData.breed}
+          {capFirstLowerRest(dogData.breed)}
         </li>
 
         <li className="col-span-4 ">

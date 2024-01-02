@@ -125,7 +125,7 @@ const FullProfile = () => {
         </li>
         <li className="col-span-3 overflow-hidden">
           <span className="font-bold">Breed: </span>
-          {dog.breed}
+          {capFirstLowerRest(dog.breed)}
         </li>
         <li className="col-span-4">
           <span className="font-bold">Energy Level: </span>

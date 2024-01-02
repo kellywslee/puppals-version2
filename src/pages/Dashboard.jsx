@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <main className="gap-2">
       <h1>Dashboard</h1>
-      <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:rounded-lg md:border-1 md:p-2">
+      <div className="flex w-full flex-col items-center justify-center gap-2 md:flex-row md:rounded-lg md:border-1 md:p-2">
         <DashboardMenu />
         <Outlet />
       </div>
