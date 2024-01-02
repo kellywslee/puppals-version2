@@ -58,10 +58,6 @@ const FullProfile = () => {
   const isFollowing = (dogId) =>
     followingList?.some((followedDog) => followedDog?.followingDogId === dogId);
 
-  console.log(myDog?.[0]?.id);
-  // console.log(isFollowing(dog.id));
-  console.log(followingList);
-
   const toggleFollow = async (e) => {
     e.preventDefault();
     if (!isAuthenticated) {
@@ -98,7 +94,7 @@ const FullProfile = () => {
             className="transition:all absolute right-4 top-4 z-50 text-sm hover:cursor-pointer hover:text-org"
             onClick={(e) => {
               e.preventDefault();
-              navigate('/findplaydates');
+              navigate(-1);
             }}
             aria-label="Close profile view"
           />

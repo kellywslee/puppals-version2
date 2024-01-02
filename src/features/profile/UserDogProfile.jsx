@@ -37,7 +37,7 @@ const UserDogProfile = () => {
   const dogData = myDog[0] || defaultDogData;
 
   return (
-    <section className="mb-4 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-1 p-3 md:mb-0 md:flex-row md:items-center md:border-none lg:gap-6">
+    <article className="mb-4 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-1 p-3 md:mb-0 md:flex-row md:items-center md:border-none lg:gap-6">
       <h2 className="text-base md:text-center md:text-lg lg:text-xl">
         My Dog&apos;s Profile
       </h2>
@@ -87,7 +87,7 @@ const UserDogProfile = () => {
           {dogData.message}
         </li>
       </ul>
-    </section>
+    </article>
   );
 };
 

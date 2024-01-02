@@ -17,7 +17,13 @@ export const getFollowers = async (myDogId) => {
 export const getFollowing = async (myDogId) => {
   const { data, error } = await supabase
     .from('follow')
-    .select('followingDogId')
+    .select(
+      `
+    followingDogId, followerDogId, userId,
+    dog!follow_followingDogId_fkey(
+      id, image, name, breed, sex, dateOfBirth, size, postalCode, lat, lng
+    )`,
+    )
     .eq('followerDogId', myDogId);
 
   if (error) {

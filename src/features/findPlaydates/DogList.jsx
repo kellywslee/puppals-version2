@@ -94,7 +94,7 @@ const DogList = () => {
   }
 
   return (
-    <section className="flex h-44 w-full flex-col gap-2 overflow-auto md:h-96">
+    <section className="flex h-44 w-full flex-col gap-2 overflow-y-auto overflow-x-hidden md:h-96">
       {sortedDogs.length ? (
         sortedDogs.map((dog) => <MiniProfile key={dog.id} dog={dog} />)
       ) : (
