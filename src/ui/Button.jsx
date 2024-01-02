@@ -4,7 +4,8 @@ const Button = ({ children, disabled, type, onClick }) => {
     'inline-block text-nowrap bg-org text-sm font-semibold text-slate-950 transition-all duration-300 hover:bg-amber-300 disabled:cursor-not-allowed active:bg-amber-200';
 
   const styles = {
-    primary: base + ' w-full rounded-lg text-xs p-1 lg:p-2 lg:text-sm',
+    primary:
+      base + ' w-11/12 max-w-28 rounded-lg text-xs p-1 lg:p-2 lg:text-sm',
     secondary:
       base +
       ' z-40 absolute bottom-3 left-3 rounded-lg border-2 border-slate-950 p-1 text-xs',

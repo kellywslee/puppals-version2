@@ -17,15 +17,13 @@ export const useFollowers = (myDogId) => {
 };
 
 export const useFollowing = (myDogId) => {
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['following', myDogId],
     queryFn: () => getFollowing(myDogId),
     enabled: !!myDogId,
   });
-  const refetchFollowwingDogs = () => {
-    refetch();
-  };
-  return { followingList: data, isLoading, error, refetchFollowwingDogs };
+
+  return { followingList: data, isLoading, error };
 };
 
 export const useFollow = (myDogId) => {
