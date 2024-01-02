@@ -36,7 +36,7 @@ const DashboardMenu = () => {
           <li key={item.id}>
             <Link
               to={item.path}
-              className="flex items-center justify-center rounded-lg bg-gray-200 p-2"
+              className="flex items-center justify-center rounded-lg bg-gray-200 p-2 hover:font-bold hover:transition-all"
             >
               <span className="mr-2 flex w-1/3 justify-center text-lg md:text-xl lg:text-2xl">
                 {item.icon}
