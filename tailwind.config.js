@@ -22,7 +22,7 @@ export default {
         sp: '#020617 2px 2px 0 0',
       },
       gridTemplateColumns: {
-        profile: '4rem repeat(4,1fr)',
+        profile: '5rem repeat(4, 1fr)',
         fullProfile: '12rem repeat(3,1fr)',
       },
       scrollSnapType: {

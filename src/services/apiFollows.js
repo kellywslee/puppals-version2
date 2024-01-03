@@ -1,14 +1,33 @@
 import supabase from './supabase';
 
+// export const getFollowers = async (myDogId) => {
+//   const { data, error } = await supabase
+//     .from('follow')
+//     .select('followerDogId')
+//     .eq('followingDogId', myDogId);
+
+//   if (error) {
+//     console.error(error);
+//     throw new Error('Followers could not be loaded');
+//   }
+
+//   return data;
+// };
 export const getFollowers = async (myDogId) => {
   const { data, error } = await supabase
     .from('follow')
-    .select('followerDogId')
+    .select(
+      `
+    followerDogId, followingDogId, userId,
+    dog!follow_followerDogId_fkey(
+      id, image, name, breed, sex, dateOfBirth, size, postalCode, lat, lng
+    )`,
+    )
     .eq('followingDogId', myDogId);
 
   if (error) {
     console.error(error);
-    throw new Error('Followers could not be loaded');
+    throw new Error('Following could not be loaded');
   }
 
   return data;

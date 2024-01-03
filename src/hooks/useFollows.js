@@ -15,8 +15,8 @@ export const useFollowers = (myDogId) => {
   });
   return {
     followersList: data,
-    isLoadingFollowerList: isLoading,
-    errorFollowerList: error,
+    isLoadingFollowersList: isLoading,
+    errorFollowersList: error,
   };
 };
 

@@ -45,7 +45,7 @@ const Following = () => {
           Following
         </h2>
       </div>
-      <section className="flex h-72 w-full flex-col gap-1 overflow-y-auto overflow-x-hidden lg:w-8/12">
+      <section className="flex h-72 w-full flex-col items-center gap-1 overflow-y-auto overflow-x-hidden lg:w-8/12">
         {dogswithDistance.length ? (
           dogswithDistance.map((dog) => {
             return <MiniProfile key={dog.id} dog={dog} />;
@@ -53,7 +53,15 @@ const Following = () => {
         ) : (
           <p className="w-11/12 text-center text-sm">
             You are not following any dogs yet.
-            <Link to="/findplaydates/dogs"> Start Searching!</Link>
+            <br />
+            <Link
+              to="/findplaydates/dogs"
+              className="underline transition-all hover:font-bold"
+            >
+              {' '}
+              Start Searching!
+            </Link>
+            🐶
           </p>
         )}
       </section>

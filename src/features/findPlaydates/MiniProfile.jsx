@@ -6,8 +6,9 @@ const MiniProfile = ({ dog }) => {
   return (
     <Link
       to={`/findplaydates/dogs/${dog.id}?dogLat=${dog.lat}&dogLng=${dog.lng}`}
+      className="w-full"
     >
-      <ul className="grid w-full min-w-72 grid-cols-profile grid-rows-3 rounded-lg border-1 border-gray-300 p-2 text-xs hover:border-org">
+      <ul className="grid w-full min-w-72 grid-cols-profile grid-rows-3 rounded-lg border-1 border-gray-300 py-2  text-xs hover:border-org">
         <li className="row-span-3 place-self-center">
           <img
             src={dog.image}
