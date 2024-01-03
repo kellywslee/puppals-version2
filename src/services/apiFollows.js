@@ -1,18 +1,5 @@
 import supabase from './supabase';
 
-// export const getFollowers = async (myDogId) => {
-//   const { data, error } = await supabase
-//     .from('follow')
-//     .select('followerDogId')
-//     .eq('followingDogId', myDogId);
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error('Followers could not be loaded');
-//   }
-
-//   return data;
-// };
 export const getFollowers = async (myDogId) => {
   const { data, error } = await supabase
     .from('follow')

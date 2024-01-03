@@ -1,5 +1,5 @@
 import Filter from './Filter';
-import Search from './Search';
+import Search from '../../ui/Search';
 import SortBy from './SortBy';
 
 const SearchOperation = () => {
