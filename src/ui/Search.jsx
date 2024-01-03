@@ -12,7 +12,7 @@ const Search = () => {
     <input
       className="flex h-8 w-1/2 max-w-96 items-center rounded-lg border-1 border-gray-300 p-2 font-sans text-sm outline-slate-950 placeholder:font-sans"
       type="search"
-      placeholder="Search dogs by name or breed"
+      placeholder="Search"
       value={searchQuery}
       onChange={handleSearchChange}
     />

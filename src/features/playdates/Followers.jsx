@@ -34,10 +34,6 @@ const Followers = () => {
     ).toFixed(1),
   }));
 
-  console.log(followersList);
-  console.log(myDog[0].id);
-  console.log(user.id);
-
   return (
     <section className="mb-2 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-1 p-3 md:mb-0 md:flex-row md:items-center md:gap-6 md:border-none lg:gap-16">
       <div className="flex items-center justify-center gap-2 md:flex-col md:gap-0">

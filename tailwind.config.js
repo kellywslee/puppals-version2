@@ -23,7 +23,7 @@ export default {
       },
       gridTemplateColumns: {
         profile: '5rem repeat(4, 1fr)',
-        fullProfile: '12rem repeat(3,1fr)',
+        chat: '1fr 3rem',
       },
       scrollSnapType: {
         yMandatory: 'y mandatory',
