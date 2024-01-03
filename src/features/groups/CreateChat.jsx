@@ -9,7 +9,7 @@ const CreateChat = ({ chatToCreate }) => {
   return (
     <>
       <Button onClick={() => setModalOpen((show) => !show)} type="edit">
-        + Create Group Chat
+        + Create Group
       </Button>
       {isModalOpen && (
         <Modal title="Create Group Chat" onClose={() => setModalOpen(false)}>

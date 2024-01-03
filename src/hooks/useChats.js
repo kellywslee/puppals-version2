@@ -56,3 +56,20 @@ export const useEditChat = () => {
 
   return { editChat: mutate, isEditing: isLoading };
 };
+
+export const useDeleteChat = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation({
+    mutationFn: deleteChat,
+    onSuccess: (data) => {
+      toast.success('Chat Room successfully deleted');
+      queryClient.invalidateQueries({ queryKey: ['chats'] });
+      queryClient.invalidateQueries(['chat', data.id]);
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  return { deleteChat: mutate, isDeleting: isLoading };
+};

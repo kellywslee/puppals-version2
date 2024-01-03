@@ -29,8 +29,10 @@ export const getChat = async (id) => {
 export const createEditChat = async (newChat, id) => {
   let query = supabase.from('chat');
 
-  if (!id) query = query.insert([newChat]);
-  if (id) query = query.update(newChat).eq('id', id);
+  console.log(newChat);
+
+  if (!id) query = query.insert([{ ...newChat }]);
+  if (id) query = query.update({ ...newChat }).eq('id', id);
 
   const { data, error } = await query.select().single();
 
