@@ -26,8 +26,6 @@ const ChatForm = ({ chatToEdit = {}, onCloseModal }) => {
   });
 
   const onSubmit = async (data) => {
-    // const { name, isPrivate } = data;
-    // const chat = { name, isPrivate, creatorId: user.id };
     if (isEditSession)
       editChat(
         { ...data },
@@ -41,7 +39,7 @@ const ChatForm = ({ chatToEdit = {}, onCloseModal }) => {
       );
     else
       createChat(
-        { ...data, creatorId: user.id },
+        { ...data, userId: user.id },
         {
           onSuccess: () => {
             reset();

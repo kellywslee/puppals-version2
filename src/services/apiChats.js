@@ -29,8 +29,6 @@ export const getChat = async (id) => {
 export const createEditChat = async (newChat, id) => {
   let query = supabase.from('chat');
 
-  console.log(newChat);
-
   if (!id) query = query.insert([{ ...newChat }]);
   if (id) query = query.update({ ...newChat }).eq('id', id);
 
@@ -39,6 +37,13 @@ export const createEditChat = async (newChat, id) => {
   if (error) {
     console.error(error);
     throw new Error('Chat Room could not be created');
+  }
+
+  if (data) {
+    const participationData = await supabase
+      .from('chatParticipation')
+      .insert([{ chatId: data.id, userId: newChat.userId }]);
+    return participationData;
   }
 
   return data;
