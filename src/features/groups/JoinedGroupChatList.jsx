@@ -1,4 +1,5 @@
 import { useAllChats } from '../../hooks/useChats';
+import { useJoinedChats } from '../../hooks/useChatParticipations';
 import Loader from '../../ui/Loader';
 
 const JoinedGroupChatList = () => {

@@ -1,7 +1,10 @@
 import supabase from './supabase';
 
 export const getChats = async () => {
-  const { data, error } = await supabase.from('chat').select('*');
+  const { data, error } = await supabase
+    .from('chat')
+    .select('*')
+    .eq('isPrivate', false);
 
   if (error) {
     console.error(error);
