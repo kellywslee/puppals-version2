@@ -7,10 +7,27 @@ import {
 } from '../services/apiChats';
 import { toast } from 'react-hot-toast';
 
-export const useAllChats = () => {
+// export const useAllChats = () => {
+//   const { data, isLoading, error } = useQuery({
+//     queryKey: ['chats'],
+//     queryFn: () => getChats(),
+//   });
+//   return { chats: data, isLoadingAllChats: isLoading, errorAllChats: error };
+// };
+
+// export const useChat = (chatId) => {
+//   const { data, isLoading, error } = useQuery({
+//     queryKey: ['chat', chatId],
+//     queryFn: () => getChat(chatId),
+//   });
+//   return { chat: data, isLoadingChat: isLoading, errorChat: error };
+// };
+
+export const useAllChats = (userId) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['chats'],
-    queryFn: () => getChats(),
+    queryKey: ['chats', userId],
+    queryFn: () => getChats(userId),
+    enabled: !!userId,
   });
   return { chats: data, isLoadingAllChats: isLoading, errorAllChats: error };
 };

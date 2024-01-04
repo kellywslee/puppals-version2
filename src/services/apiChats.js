@@ -1,17 +1,50 @@
 import supabase from './supabase';
 
-export const getChats = async () => {
-  const { data, error } = await supabase
+// export const getChats = async () => {
+//   const { data, error } = await supabase
+//     .from('chat')
+//     .select('*')
+//     .eq('isPrivate', false);
+
+//   if (error) {
+//     console.error(error);
+//     throw new Error('Chat Rooms could not be loaded');
+//   }
+
+//   return data;
+// };
+
+export const getChats = async (userId) => {
+  // Get all chat IDs that the user has joined
+  const { data: joinedChatIdsData, error: joinedChatIdsError } = await supabase
+    .from('chatParticipation')
+    .select('chatId')
+    .eq('userId', userId);
+
+  if (joinedChatIdsError) {
+    console.error(joinedChatIdsError);
+    throw new Error('Could not load joined chat IDs');
+  }
+
+  const joinedChatIds = joinedChatIdsData.map((cp) => cp.chatId);
+
+  // Get all chats where isPrivate is false
+  const { data: allChatsData, error: allChatsError } = await supabase
     .from('chat')
     .select('*')
     .eq('isPrivate', false);
 
-  if (error) {
-    console.error(error);
+  if (allChatsError) {
+    console.error(allChatsError);
     throw new Error('Chat Rooms could not be loaded');
   }
 
-  return data;
+  // Filter out chats that the user has joined
+  const chatsToDisplay = allChatsData.filter(
+    (chat) => !joinedChatIds.includes(chat.id),
+  );
+
+  return chatsToDisplay;
 };
 
 export const getChat = async (id) => {

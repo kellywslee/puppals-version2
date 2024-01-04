@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   getJoinedChats,
+  getChatParticipants,
   joinChat,
   leaveChat,
 } from '../services/apiChatParticipations';
@@ -15,6 +16,18 @@ export const useJoinedChats = (userId) => {
     joinedChats: data,
     isLoadingJoinedChats: isLoading,
     errorJoinedChats: error,
+  };
+};
+
+export const useChatParticipants = (chatId) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['chatParticipants', chatId],
+    queryFn: () => getChatParticipants(chatId),
+  });
+  return {
+    chatParticipants: data,
+    isLoadingChatParticipants: isLoading,
+    errorChatParticipants: error,
   };
 };
 

@@ -1,11 +1,13 @@
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { useUser } from '../../hooks/useAuth';
 import { useAllChats } from '../../hooks/useChats';
 import GroupChatInfoCard from '../../ui/GroupChatInfoCard';
 import Loader from '../../ui/Loader';
 
 const GroupChatList = () => {
-  const { chats, isLoadingAllChats, errorAllChats } = useAllChats();
+  const { user } = useUser();
+  const { chats, isLoadingAllChats, errorAllChats } = useAllChats(user.id);
 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
@@ -33,7 +35,7 @@ const GroupChatList = () => {
       <h3 className="mb-1 text-sm">Join Now</h3>
       <div className="flex w-full flex-col gap-1">
         {filteredChats.map((chat) => (
-          <GroupChatInfoCard key={chat.id} chat={chat} />
+          <GroupChatInfoCard key={chat.id} chat={chat} isJoined={false} />
         ))}
       </div>
     </section>

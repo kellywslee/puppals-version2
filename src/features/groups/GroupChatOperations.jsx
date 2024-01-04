@@ -3,8 +3,8 @@ import Search from '../../ui/Search';
 const GroupChatOperations = () => {
   return (
     <section className="flex w-full justify-between gap-2">
-      <CreateChat />
       <Search />
+      <CreateChat />
     </section>
   );
 };
