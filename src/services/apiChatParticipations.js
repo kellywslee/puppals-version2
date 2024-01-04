@@ -1,9 +1,22 @@
 import supabase from './supabase';
 
+// export const getJoinedChats = async (userId) => {
+//   const { data, error } = await supabase
+//     .from('chatParticipation')
+//     .select('chatId')
+//     .eq('userId', userId);
+
+//   if (error) {
+//     console.error(error);
+//     throw new Error('Chat Rooms could not be loaded');
+//   }
+
+//   return data;
+// };
 export const getJoinedChats = async (userId) => {
   const { data, error } = await supabase
     .from('chatParticipation')
-    .select('chatId')
+    .select(`chatId, userId, chat(id, name)`)
     .eq('userId', userId);
 
   if (error) {
