@@ -4,7 +4,7 @@ import { useChatParticipantsCount } from '../hooks/useChatParticipations';
 import Button from './Button';
 import Loader from './Loader';
 
-const GroupChatInfoCard = ({ chat }) => {
+const JoinedGroupChatInfoCard = ({ chat }) => {
   const {
     chatParticipantsCount,
     isLoadingChatParticipantsCount,
@@ -16,13 +16,15 @@ const GroupChatInfoCard = ({ chat }) => {
     toast.error('Error loading chat participants count');
     return null;
   }
+
   return (
     <ul className="grid w-full grid-cols-chat rounded-lg border-1 p-2 text-sm transition-all hover:border-org">
       <li className="font-bold">{chat.name}</li>
       <li className="row-span-2 flex items-center">
-        <Button type="primary">Join</Button>
+        <Button type="primary">Chat</Button>
       </li>
       <li>
+        {' '}
         {chatParticipantsCount}{' '}
         {chatParticipantsCount <= 1 ? 'member' : ' members'}
       </li>
@@ -30,4 +32,4 @@ const GroupChatInfoCard = ({ chat }) => {
   );
 };
 
-export default GroupChatInfoCard;
+export default JoinedGroupChatInfoCard;

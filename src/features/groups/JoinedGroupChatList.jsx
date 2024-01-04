@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
 import { useJoinedChats } from '../../hooks/useChatParticipations';
-import GroupChatInfoCard from '../../ui/GroupChatInfoCard';
+import JoinedGroupChatInfoCard from '../../ui/JoinedGroupChatInfoCard';
 import Loader from '../../ui/Loader';
 
 const JoinedGroupChatList = () => {
@@ -20,7 +20,7 @@ const JoinedGroupChatList = () => {
       <h3 className="mb-1 text-sm">My Chats</h3>
       <div className="flex w-full flex-col gap-1">
         {joinedChats.map((item) => (
-          <GroupChatInfoCard
+          <JoinedGroupChatInfoCard
             key={item.chat.id}
             chat={item.chat}
             isJoined={true}
