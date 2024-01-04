@@ -38,7 +38,8 @@ export const useJoinChat = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: joinChat,
     onSuccess: (data) => {
-      queryClient.invalidateQueries(['joinedChats', data.userId]);
+      queryClient.invalidateQueries(['chatParticipantsCount', data?.chatId]);
+      queryClient.invalidateQueries(['joinedChats', data?.userId]);
       toast.success('Chat Room joined!');
     },
     onError: (err) => {
@@ -54,6 +55,7 @@ export const useLeaveChat = () => {
   const { mutate, isLoading } = useMutation({
     mutationFn: leaveChat,
     onSuccess: (data) => {
+      queryClient.invalidateQueries(['chatParticipantsCount', data.chatId]);
       queryClient.invalidateQueries(['joinedChats', data.userId]);
       toast.success('Chat Room left!');
     },

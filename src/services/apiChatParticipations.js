@@ -28,7 +28,7 @@ export const getChatParticipantsCount = async (chatId) => {
   return count;
 };
 
-export const joinChat = async (userId, chatId) => {
+export const joinChat = async ({ userId, chatId }) => {
   const { data, error } = await supabase
     .from('chatParticipation')
     .insert([{ userId, chatId }]);

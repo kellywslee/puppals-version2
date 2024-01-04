@@ -36,7 +36,7 @@ const GroupChatList = () => {
       <h3 className="mb-1 text-sm">Join Now</h3>
       <div className="flex w-full flex-col gap-1">
         {filteredChats.map((chat) => (
-          <GroupChatInfoCard key={chat.id} chat={chat} isJoined={false} />
+          <GroupChatInfoCard key={chat.id} chat={chat} user={user} />
         ))}
       </div>
     </section>
