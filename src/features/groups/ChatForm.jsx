@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useUser } from '../../hooks/useAuth';
-import { useCreateChat, useEditChat } from '../../hooks/useChats';
+import { useCreateGroupChat, useEditGroupChat } from '../../hooks/useChats';
 import Button from '../../ui/Button';
 
 // eslint-disable-next-line react/prop-types
 const ChatForm = ({ chatToEdit = {}, onCloseModal }) => {
   const navigate = useNavigate();
   const { user } = useUser();
-  const { isCreatingChat, createChat } = useCreateChat();
-  const { isEditingChat, editChat } = useEditChat();
-  const isWorking = isCreatingChat || isEditingChat;
+  const { isCreatingGroupChat, createGroupChat } = useCreateGroupChat();
+  const { isEditingGroupChat, editGroupChat } = useEditGroupChat();
+  const isWorking = isCreatingGroupChat || isEditingGroupChat;
 
   const { id: editId, ...editValues } = chatToEdit;
   const isEditSession = Boolean(editId);
@@ -27,7 +27,7 @@ const ChatForm = ({ chatToEdit = {}, onCloseModal }) => {
 
   const onSubmit = async (data) => {
     if (isEditSession)
-      editChat(
+      editGroupChat(
         { ...data },
         {
           onSuccess: () => {
@@ -38,7 +38,7 @@ const ChatForm = ({ chatToEdit = {}, onCloseModal }) => {
         },
       );
     else
-      createChat(
+      createGroupChat(
         { ...data, userId: user.id },
         {
           onSuccess: () => {
