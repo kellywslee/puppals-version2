@@ -7,6 +7,7 @@ import { capFirstLowerRest, calculateAge } from '../../utils/helpers';
 import { ImCross } from 'react-icons/im';
 import { BsCircleFill } from 'react-icons/bs';
 import { calDistance } from '../../utils/helpers';
+import SendMessage from '../messages/SendMessage';
 import Loader from '../../ui/Loader';
 import Button from '../../ui/Button';
 
@@ -91,7 +92,7 @@ const FullProfile = () => {
         </li>
         <li>
           <ImCross
-            className="transition:all absolute right-4 top-4 z-50 text-sm hover:cursor-pointer hover:text-org"
+            className="transition:all absolute right-4 top-4 z-40 text-sm hover:cursor-pointer hover:text-org"
             onClick={(e) => {
               e.preventDefault();
               navigate(-1);
@@ -121,7 +122,8 @@ const FullProfile = () => {
           {dog.size}&nbsp;lb
         </li>
         <li className="col-span-1 flex justify-start">
-          <Button type="primary">Message</Button>
+          {/* <Button type="primary">Message</Button> */}
+          <SendMessage dogToSendMessage={dog} user={user} />
         </li>
         <li className="col-span-3 overflow-hidden">
           <span className="font-bold">Breed: </span>
