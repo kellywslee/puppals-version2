@@ -48,6 +48,24 @@ export const getChat = async (id) => {
   return data;
 };
 
+export const findChatByName = async (user1Id, user2Id) => {
+  const chatNameA = `${user1Id}${user2Id}`;
+  const chatNameB = `${user2Id}${user1Id}`;
+
+  const { data, error } = await supabase
+    .from('chat')
+    .select('id, name')
+    .in('name', [chatNameA, chatNameB])
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error('Chat Room not found');
+  }
+
+  return data;
+};
+
 export const createEditChat = async (newChat, id) => {
   let query = supabase.from('chat');
 
@@ -60,14 +78,6 @@ export const createEditChat = async (newChat, id) => {
     console.error(error);
     throw new Error('Chat Room could not be created');
   }
-
-  if (data) {
-    const participationData = await supabase
-      .from('chatParticipation')
-      .insert([{ chatId: data.id, userId: newChat.userId }]);
-    return participationData;
-  }
-
   return data;
 };
 

@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
 import { useAllChats } from '../../hooks/useChats';
-import GroupChatInfoCard from '../../ui/GroupChatInfoCard';
+import GroupChatInfoCard from './GroupChatInfoCard';
 import Loader from '../../ui/Loader';
 
 const GroupChatList = () => {

@@ -7,7 +7,7 @@ export const getMessages = async (chatId) => {
     .from('message')
     .select('*')
     .eq('chatId', chatId)
-    .order('insertedAt', { ascending: true });
+    .order('createdAt', { ascending: true });
 
   if (error) {
     console.error(error);
@@ -19,50 +19,26 @@ export const getMessages = async (chatId) => {
 
 export const checkForExistingChat = async (senderId, receiverId) => {
   try {
-    // First, find all chats that the sender is part of.
-    const { data: senderChats, error: senderError } = await supabase
-      .from('chatParticipation')
-      .select('chatId')
-      .eq('userId', senderId);
+    const expectedChatName =
+      `${senderId}${receiverId}` || `${receiverId}${senderId}`;
 
-    if (senderError) {
-      console.error('Error finding sender chats:', senderError);
-      throw senderError;
+    // Query the chat table for a chat with the expected name and is private
+    const { data: chats, error: chatError } = await supabase
+      .from('chat')
+      .select('id, name, isPrivate')
+      .eq('name', expectedChatName)
+      .eq('isPrivate', true);
+
+    if (chatError) {
+      console.error('Error retrieving chat details:', chatError);
+      throw chatError;
     }
 
-    // Then, find all chats that the receiver is part of.
-    const { data: receiverChats, error: receiverError } = await supabase
-      .from('chatParticipation')
-      .select('chatId')
-      .eq('userId', receiverId);
-
-    if (receiverError) {
-      console.error('Error finding receiver chats:', receiverError);
-      throw receiverError;
+    // If a chat is found and it is private, return it
+    if (chats && chats.length > 0 && chats[0].isPrivate) {
+      return chats[0];
     }
-
-    // Find common chatIds between sender and receiver
-    const commonChats = senderChats.filter(({ chatId }) =>
-      receiverChats.some((c) => c.chatId === chatId),
-    );
-
-    // If there's a common chat, fetch its details
-    if (commonChats.length > 0) {
-      const { data: chat, error: chatError } = await supabase
-        .from('chat')
-        .select('id, name, isPrivate')
-        .eq('id', commonChats[0].chatId)
-        .single();
-
-      if (chatError) {
-        console.error('Error retrieving chat details:', chatError);
-        throw chatError;
-      }
-
-      return chat;
-    }
-
-    return null;
+    return null; // Return null if no chat is found or if it's not private
   } catch (error) {
     console.error('Exception when checking for existing chat:', error);
     throw error;
@@ -78,8 +54,9 @@ export const sendMessage = async (messageDetails) => {
   if (!chat) {
     // Create a new chat room if it doesn't exist
     chat = await createEditChat({
-      name: '1:1 Chat',
+      name: `${messageDetails.senderId}${messageDetails.receiverId}`,
       isPrivate: true,
+      userId: messageDetails.senderId,
     });
 
     // Create chat participations for both dogs
@@ -94,14 +71,16 @@ export const sendMessage = async (messageDetails) => {
     userId: messageDetails.senderId,
   };
 
-  const { data, error } = await supabase.from('message').insert([message]);
+  const { data: messageData, error } = await supabase
+    .from('message')
+    .insert([message]);
 
   if (error) {
-    console.error(error);
+    console.error('Error sending message:', error);
     throw new Error('Message could not be sent');
   }
 
-  return data;
+  return messageData;
 };
 
 export const deleteMessage = async (id) => {

@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
 import { useJoinedChats } from '../../hooks/useChatParticipations';
-import JoinedGroupChatInfoCard from '../../ui/JoinedGroupChatInfoCard';
+import JoinedGroupChatInfoCard from './JoinedGroupChatInfoCard';
 import Loader from '../../ui/Loader';
 
 const JoinedGroupChatList = () => {

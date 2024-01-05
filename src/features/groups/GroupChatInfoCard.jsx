@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { toast } from 'react-hot-toast';
-import { useJoinChat } from '../hooks/useChatParticipations';
-import { useChatParticipantsCount } from '../hooks/useChatParticipations';
-import Button from './Button';
-import Loader from './Loader';
+import { useJoinChat } from '../../hooks/useChatParticipations';
+import { useChatParticipantsCount } from '../../hooks/useChatParticipations';
+import Button from '../../ui/Button';
+import Loader from '../../ui/Loader';
 
 const GroupChatInfoCard = ({ chat, user }) => {
   const {

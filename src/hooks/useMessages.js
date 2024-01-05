@@ -6,24 +6,51 @@ import {
 } from '../services/apiMessages';
 import { toast } from 'react-hot-toast';
 
-export const useMessages = (chatId) => {
+export const useAllMessages = (chatId) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['messages', chatId],
     queryFn: () => getMessages(chatId),
+    enabled: !!chatId,
   });
-  return { messages: data, isLoadingMessages: isLoading, errorMessages: error };
+  return {
+    allMessages: data,
+    isLoadingMessages: isLoading,
+    errorMessages: error,
+  };
 };
+
+// export const useSendMessage = () => {
+//   const queryClient = useQueryClient();
+//   const { mutate, isLoading, error } = useMutation({
+//     mutationFn: sendMessage,
+//     onSuccess: (data) => {
+//       queryClient.invalidateQueries(['messages', data.chatId]);
+//       toast.success('Message sent!');
+//     },
+//     onError: (err) => {
+//       console.error('Error when sending message:', err);
+//       toast.error(err.message || 'Error sending message');
+//     },
+//   });
+
+//   return { sendMessage: mutate, isSending: isLoading, errorSending: error };
+// };
 
 export const useSendMessage = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, error } = useMutation({
     mutationFn: sendMessage,
     onSuccess: (data) => {
-      queryClient.invalidateQueries(['messages', data.chatId]);
-      toast.success('Message sent!');
+      if (data && data.chatId) {
+        queryClient.invalidateQueries(['messages', data.chatId]);
+        toast.success('Message sent!');
+      } else {
+        console.error('Invalid data received:', data);
+      }
     },
     onError: (err) => {
-      toast.error(err.message);
+      console.error('Error when sending message:', err);
+      toast.error(err.message || 'Error sending message');
     },
   });
 

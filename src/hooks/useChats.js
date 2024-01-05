@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   getChats,
   getChat,
+  findChatByName,
   createEditChat,
   createEditGroupChat,
   deleteChat,
@@ -21,6 +22,14 @@ export const useChat = (chatId) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['chat', chatId],
     queryFn: () => getChat(chatId),
+  });
+  return { chat: data, isLoadingChat: isLoading, errorChat: error };
+};
+
+export const useChatByName = (user1Id, user2Id) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['chatByName', user1Id, user2Id],
+    queryFn: () => findChatByName(user1Id, user2Id),
   });
   return { chat: data, isLoadingChat: isLoading, errorChat: error };
 };
@@ -59,7 +68,7 @@ export const useEditChat = () => {
   return { editChat: mutate, isEditing: isLoading };
 };
 
-export const useGroupCreateChat = () => {
+export const useCreateGroupChat = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation({
     mutationFn: createEditGroupChat,
