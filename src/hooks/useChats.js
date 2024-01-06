@@ -4,7 +4,7 @@ import {
   getChat,
   findChatByName,
   createChat,
-  createEditGroupChat,
+  createEditOpenChat,
   deleteChat,
 } from '../services/apiChats';
 import { toast } from 'react-hot-toast';
@@ -68,10 +68,10 @@ export const useCreateChat = () => {
 //   return { editChat: mutate, isEditing: isLoading };
 // };
 
-export const useCreateGroupChat = () => {
+export const useCreateOpenChat = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation({
-    mutationFn: createEditGroupChat,
+    mutationFn: createEditOpenChat,
     onSuccess: (data) => {
       queryClient.invalidateQueries(['chats']);
       queryClient.invalidateQueries(['chat', data.id]);
@@ -82,13 +82,13 @@ export const useCreateGroupChat = () => {
     },
   });
 
-  return { createGroupChat: mutate, isGroupCreating: isLoading };
+  return { createOpenChat: mutate, isOpenCreating: isLoading };
 };
 
-export const useEditGroupChat = () => {
+export const useEditOpenChat = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation({
-    mutationFn: ({ newChatData, id }) => createEditGroupChat(newChatData, id),
+    mutationFn: ({ newChatData, id }) => createEditOpenChat(newChatData, id),
     onSuccess: (data) => {
       queryClient.invalidateQueries(['chats']);
       queryClient.invalidateQueries(['chat', data.id]);
@@ -99,7 +99,7 @@ export const useEditGroupChat = () => {
     },
   });
 
-  return { editGroupChat: mutate, isGroupEditing: isLoading };
+  return { editOpenChat: mutate, isOpenEditing: isLoading };
 };
 
 export const useDeleteChat = () => {

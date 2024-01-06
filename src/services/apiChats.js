@@ -141,7 +141,7 @@ export const createChat = async ({ senderId, receiverId }) => {
   return null;
 };
 
-export const createEditGroupChat = async (newChat, id) => {
+export const createEditOpenChat = async (newChat, id) => {
   let query = supabase.from('chat');
 
   if (!id) query = query.insert([{ ...newChat }]);

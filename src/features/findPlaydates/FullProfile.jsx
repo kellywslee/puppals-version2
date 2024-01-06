@@ -8,7 +8,7 @@ import { capFirstLowerRest, calculateAge } from '../../utils/helpers';
 import { ImCross } from 'react-icons/im';
 import { BsCircleFill } from 'react-icons/bs';
 import { calDistance } from '../../utils/helpers';
-import SendMessage from '../messages/SendMessage';
+import SendMessage from '../privateChats/SendMessage';
 import Loader from '../../ui/Loader';
 import Button from '../../ui/Button';
 

@@ -7,12 +7,17 @@ import { IoSettingsOutline } from 'react-icons/io5';
 
 const DashboardMenu = () => {
   const list = [
-    { id: 1, name: 'Messages', icon: <GoMail />, path: '/dashboard/messages' },
+    {
+      id: 1,
+      name: 'Private Chats',
+      icon: <GoMail />,
+      path: '/dashboard/privatechats',
+    },
     {
       id: 2,
-      name: 'Groups',
+      name: 'Open Chats',
       icon: <LiaUserFriendsSolid />,
-      path: '/dashboard/groups',
+      path: '/dashboard/openchats',
     },
     {
       id: 3,

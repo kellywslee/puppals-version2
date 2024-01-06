@@ -6,8 +6,8 @@ import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import Faq from './pages/Faq';
 import Dashboard from './pages/Dashboard';
-import Messages from './features/messages/Messages';
-import Groups from './features/groups/Groups';
+import PrivateChats from './features/privateChats/PrivateChats';
+import OpenChats from './features/openChats/OpenChats';
 import UserDogProfile from './features/profile/UserDogProfile';
 import Followers from './features/playdates/Followers';
 import Following from './features/playdates/Following';
@@ -62,20 +62,20 @@ const App = () => {
                 </ProtectedRoute>
               }
             >
-              <Route index element={<Navigate replace to="messages" />} />
+              <Route index element={<Navigate replace to="privatechats" />} />
               <Route
-                path="messages"
+                path="privatechats"
                 element={
                   <ProtectedRoute>
-                    <Messages />
+                    <PrivateChats />
                   </ProtectedRoute>
                 }
               />
               <Route
-                path="groups"
+                path="openchats"
                 element={
                   <ProtectedRoute>
-                    <Groups />
+                    <OpenChats />
                   </ProtectedRoute>
                 }
               />
