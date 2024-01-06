@@ -24,8 +24,11 @@ export const useSendMessage = () => {
   const { mutate, isLoading, error } = useMutation({
     mutationFn: sendMessage,
     onSuccess: (data) => {
-      queryClient.invalidateQueries(['messages', data.chatId]);
-      toast.success('Message sent!');
+      if (data && data.chatId) {
+        queryClient.invalidateQueries(['messages', data.chatId]);
+      } else {
+        console.error('Invalid data received:', data);
+      }
     },
     onError: (err) => {
       console.error('Error when sending message:', err);
@@ -35,27 +38,6 @@ export const useSendMessage = () => {
 
   return { sendMessage: mutate, isSending: isLoading, errorSending: error };
 };
-
-// export const useSendMessage = () => {
-//   const queryClient = useQueryClient();
-//   const { mutate, isLoading, error } = useMutation({
-//     mutationFn: sendMessage,
-//     onSuccess: (data) => {
-//       if (data && data.chatId) {
-//         queryClient.invalidateQueries(['messages', data.chatId]);
-//         toast.success('Message sent!');
-//       } else {
-//         console.error('Invalid data received:', data);
-//       }
-//     },
-//     onError: (err) => {
-//       console.error('Error when sending message:', err);
-//       toast.error(err.message || 'Error sending message');
-//     },
-//   });
-
-//   return { sendMessage: mutate, isSending: isLoading, errorSending: error };
-// };
 
 export const useDeleteMessage = () => {
   const queryClient = useQueryClient();

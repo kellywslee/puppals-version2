@@ -17,14 +17,12 @@ export const getMessages = async (chatId) => {
   return data;
 };
 
-export const sendMessage = async (messageDetails) => {
-  const message = {
-    content: messageDetails.content,
-    chatId: messageDetails.chatId,
-    userId: messageDetails.userId,
-  };
+export const sendMessage = async (message) => {
+  let query = supabase.from('message');
 
-  const { data, error } = await supabase.from('message').insert([message]);
+  query = query.insert([{ ...message }]);
+
+  const { data, error } = await query.select().single();
 
   if (error) {
     console.error('Error sending message:', error);
@@ -33,44 +31,6 @@ export const sendMessage = async (messageDetails) => {
 
   return data;
 };
-
-// export const sendMessage = async (messageDetails) => {
-//   let chat = await checkForExistingChat(
-//     messageDetails.senderId,
-//     messageDetails.receiverId,
-//   );
-
-//   if (!chat) {
-//     // Create a new chat room if it doesn't exist
-//     chat = await createEditChat({
-//       name: `${messageDetails.senderId}${messageDetails.receiverId}`,
-//       isPrivate: true,
-//       userId: messageDetails.senderId,
-//     });
-
-//     // Create chat participations for both dogs
-//     await joinChat({ userId: messageDetails.senderId, chatId: chat.id });
-//     await joinChat({ userId: messageDetails.receiverId, chatId: chat.id });
-//   }
-
-//   // Send the message to the chat room
-//   const message = {
-//     content: messageDetails.content,
-//     chatId: chat.id,
-//     userId: messageDetails.senderId,
-//   };
-
-//   const { data: messageData, error } = await supabase
-//     .from('message')
-//     .insert([message]);
-
-//   if (error) {
-//     console.error('Error sending message:', error);
-//     throw new Error('Message could not be sent');
-//   }
-
-//   return messageData;
-// };
 
 export const deleteMessage = async (id) => {
   const { data, error } = await supabase.from('message').delete().eq('id', id);

@@ -41,7 +41,6 @@ export const useCreateChat = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries(['chats']);
       queryClient.invalidateQueries(['chat', data.id]);
-      toast.success('Chat Room created!');
     },
     onError: (err) => {
       console.error(err);

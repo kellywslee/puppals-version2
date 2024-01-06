@@ -11,7 +11,6 @@ const SendMessage = ({ dogToSendMessage, user, onClick }) => {
     if (onClick) {
       onClick();
     }
-
     setModalOpen(true);
   };
 
