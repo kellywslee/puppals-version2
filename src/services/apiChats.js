@@ -94,10 +94,44 @@ export const checkForExistingChat = async (senderId, receiverId) => {
   }
 };
 
-export const createEditChat = async ({ newChat, senderId, receiverId, id }) => {
-  let query = supabase.from('chat');
+// export const createEditChat = async ({ newChat, senderId, receiverId, id }) => {
+//   let query = supabase.from('chat');
 
-  if (!id)
+//   if (!id)
+//     query = query.insert([
+//       {
+//         name: `${senderId}${receiverId}`,
+//         isPrivate: true,
+//         userId: senderId,
+//       },
+//     ]);
+//   if (id) query = query.update({ ...newChat }).eq('id', id);
+
+//   const { data, error } = await query.select().single();
+
+//   if (error) {
+//     console.error(error);
+//     throw new Error('Chat Room could not be created');
+//   }
+
+//   if (data) {
+//     const participationData1 = await supabase
+//       .from('chatParticipation')
+//       .insert([{ chatId: data.id, userId: senderId }]);
+//     const participationData2 = await supabase
+//       .from('chatParticipation')
+//       .insert([{ chatId: data.id, userId: receiverId }]);
+//     return participationData1 && participationData2;
+//   }
+
+//   return data;
+// };
+
+export const createChat = async ({ senderId, receiverId }) => {
+  // Check for existing chat first
+  const existingChat = await checkForExistingChat(senderId, receiverId);
+  let query = supabase.from('chat');
+  if (!existingChat)
     query = query.insert([
       {
         name: `${senderId}${receiverId}`,
@@ -105,7 +139,6 @@ export const createEditChat = async ({ newChat, senderId, receiverId, id }) => {
         userId: senderId,
       },
     ]);
-  if (id) query = query.update({ ...newChat }).eq('id', id);
 
   const { data, error } = await query.select().single();
 
@@ -113,18 +146,24 @@ export const createEditChat = async ({ newChat, senderId, receiverId, id }) => {
     console.error(error);
     throw new Error('Chat Room could not be created');
   }
-
+  // Create chat participations
   if (data) {
-    const participationData1 = await supabase
-      .from('chatParticipation')
-      .insert([{ chatId: data.id, userId: senderId }]);
-    const participationData2 = await supabase
-      .from('chatParticipation')
-      .insert([{ chatId: data.id, userId: receiverId }]);
-    return participationData1 && participationData2;
+    const [participationData1, participationData2] = await Promise.all([
+      supabase
+        .from('chatParticipation')
+        .insert({ chatId: data.id, userId: senderId }),
+      supabase
+        .from('chatParticipation')
+        .insert({ chatId: data.id, userId: receiverId }),
+    ]);
+
+    return {
+      chat: data,
+      participations: [participationData1, participationData2],
+    };
   }
 
-  return data;
+  return null;
 };
 
 export const createEditGroupChat = async (newChat, id) => {

@@ -16,20 +16,6 @@ const SendMessage = ({ dogToSendMessage, user, onClick }) => {
   };
 
   return (
-    // <>
-    //   <Button onClick={() => setModalOpen((show) => !show)} type="primary">
-    //     Message
-    //   </Button>
-    //   {isModalOpen && (
-    //     <Modal title="Chat" onClose={() => setModalOpen(false)}>
-    //       <ChatRoom
-    //         dogToSendMessage={dogToSendMessage}
-    //         user={user}
-    //         onCloseModal={() => setModalOpen(false)}
-    //       />
-    //     </Modal>
-    //   )}
-    // </>
     <>
       <Button onClick={handleMessageButtonClick} type="primary">
         Message

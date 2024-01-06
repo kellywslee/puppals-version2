@@ -3,7 +3,7 @@ import {
   getChats,
   getChat,
   findChatByName,
-  createEditChat,
+  createChat,
   createEditGroupChat,
   deleteChat,
 } from '../services/apiChats';
@@ -37,7 +37,7 @@ export const useChatByName = (user1Id, user2Id) => {
 export const useCreateChat = () => {
   const queryClient = useQueryClient();
   const { mutate, isLoading, error } = useMutation({
-    mutationFn: createEditChat,
+    mutationFn: createChat,
     onSuccess: (data) => {
       queryClient.invalidateQueries(['chats']);
       queryClient.invalidateQueries(['chat', data.id]);
@@ -52,22 +52,22 @@ export const useCreateChat = () => {
   return { createChat: mutate, isCreating: isLoading, errorCreating: error };
 };
 
-export const useEditChat = () => {
-  const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMutation({
-    mutationFn: ({ newChatData, id }) => createEditChat(newChatData, id),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries(['chats']);
-      queryClient.invalidateQueries(['chat', data.id]);
-      toast.success('Chat Room successfully edited');
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
+// export const useEditChat = () => {
+//   const queryClient = useQueryClient();
+//   const { mutate, isLoading } = useMutation({
+//     mutationFn: ({ newChatData, id }) => createEditChat(newChatData, id),
+//     onSuccess: (data) => {
+//       queryClient.invalidateQueries(['chats']);
+//       queryClient.invalidateQueries(['chat', data.id]);
+//       toast.success('Chat Room successfully edited');
+//     },
+//     onError: (err) => {
+//       toast.error(err.message);
+//     },
+//   });
 
-  return { editChat: mutate, isEditing: isLoading };
-};
+//   return { editChat: mutate, isEditing: isLoading };
+// };
 
 export const useCreateGroupChat = () => {
   const queryClient = useQueryClient();

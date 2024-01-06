@@ -1,5 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getMessages, deleteMessage } from '../services/apiMessages';
+import {
+  getMessages,
+  sendMessage,
+  deleteMessage,
+} from '../services/apiMessages';
 import { toast } from 'react-hot-toast';
 
 export const useAllMessages = (chatId) => {
@@ -15,22 +19,22 @@ export const useAllMessages = (chatId) => {
   };
 };
 
-// export const useSendMessage = () => {
-//   const queryClient = useQueryClient();
-//   const { mutate, isLoading, error } = useMutation({
-//     mutationFn: sendMessage,
-//     onSuccess: (data) => {
-//       queryClient.invalidateQueries(['messages', data.chatId]);
-//       toast.success('Message sent!');
-//     },
-//     onError: (err) => {
-//       console.error('Error when sending message:', err);
-//       toast.error(err.message || 'Error sending message');
-//     },
-//   });
+export const useSendMessage = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, error } = useMutation({
+    mutationFn: sendMessage,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(['messages', data.chatId]);
+      toast.success('Message sent!');
+    },
+    onError: (err) => {
+      console.error('Error when sending message:', err);
+      toast.error(err.message || 'Error sending message');
+    },
+  });
 
-//   return { sendMessage: mutate, isSending: isLoading, errorSending: error };
-// };
+  return { sendMessage: mutate, isSending: isLoading, errorSending: error };
+};
 
 // export const useSendMessage = () => {
 //   const queryClient = useQueryClient();

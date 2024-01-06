@@ -17,33 +17,22 @@ export const getMessages = async (chatId) => {
   return data;
 };
 
-// export const checkForExistingChat = async (senderId, receiverId) => {
-//   try {
-//     const expectedChatName =
-//       `${senderId}${receiverId}` || `${receiverId}${senderId}`;
+export const sendMessage = async (messageDetails) => {
+  const message = {
+    content: messageDetails.content,
+    chatId: messageDetails.chatId,
+    userId: messageDetails.userId,
+  };
 
-//     // Query the chat table for a chat with the expected name and is private
-//     const { data: chats, error: chatError } = await supabase
-//       .from('chat')
-//       .select('id, name, isPrivate')
-//       .eq('name', expectedChatName)
-//       .eq('isPrivate', true);
+  const { data, error } = await supabase.from('message').insert([message]);
 
-//     if (chatError) {
-//       console.error('Error retrieving chat details:', chatError);
-//       throw chatError;
-//     }
+  if (error) {
+    console.error('Error sending message:', error);
+    throw new Error('Message could not be sent');
+  }
 
-//     // If a chat is found and it is private, return it
-//     if (chats && chats.length > 0 && chats[0].isPrivate) {
-//       return chats[0];
-//     }
-//     return null; // Return null if no chat is found or if it's not private
-//   } catch (error) {
-//     console.error('Exception when checking for existing chat:', error);
-//     throw error;
-//   }
-// };
+  return data;
+};
 
 // export const sendMessage = async (messageDetails) => {
 //   let chat = await checkForExistingChat(
