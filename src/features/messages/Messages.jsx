@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
-const Messages = ({ messsage }) => {
-  return <div>{messsage.content}</div>;
+const Messages = () => {
+  return <div>123</div>;
 };
-
 export default Messages;

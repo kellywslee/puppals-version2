@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FaPaw } from 'react-icons/fa';
+import { useMyDog } from '../../hooks/useDogs';
 import { useChatByName } from '../../hooks/useChats';
 import { useSendMessage, useAllMessages } from '../../hooks/useMessages';
 import ChatMessage from './ChatMessage';
@@ -13,7 +14,7 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
     user.id,
     dogToSendMessage.userId,
   );
-
+  const { myDog, isLoadingMyDog, errorMyDog } = useMyDog(user?.id);
   const { allMessages, isLoadingAllMessages, errorAllMessages } =
     useAllMessages(chat?.id);
   const { sendMessage, isSending, errorSending } = useSendMessage();
@@ -28,6 +29,7 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
       content: formValue,
       userId: user.id,
       chatId: chat?.id,
+      dogId: myDog?.[0]?.id,
     });
     setFormValue('');
   };
@@ -37,8 +39,13 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
     return;
   }
 
-  if (isSending || isLoadingChat || isLoadingAllMessages) return <Loader />;
+  if (isLoadingMyDog || isSending || isLoadingChat || isLoadingAllMessages)
+    return <Loader />;
 
+  if (errorMyDog) {
+    toast.error('Error loading your dog');
+    return null;
+  }
   if (errorSending) {
     toast.error('Error sending message');
     return null;
@@ -50,8 +57,7 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
 
   return (
     <section className="relative z-50 h-60">
-      <section>
-        {' '}
+      <section className="flex h-48 flex-col gap-2 overflow-auto">
         {allMessages &&
           allMessages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
       </section>
@@ -63,7 +69,7 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
           placeholder="Message"
-          className="w-11/12 rounded-lg border-1 outline-slate-950"
+          className="w-11/12 rounded-lg border-1 p-2 outline-slate-950"
         />
         <button type="submit" disabled={!formValue} aria-label="Send message">
           <FaPaw />

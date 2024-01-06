@@ -1,11 +1,17 @@
 import supabase from './supabase';
-// import { createEditChat } from './apiChats';
-// import { joinChat } from './apiChatParticipations';
 
 export const getMessages = async (chatId) => {
   const { data, error } = await supabase
     .from('message')
-    .select('*')
+    .select(
+      `
+      *,
+      dog:dogId (
+        name,
+        image
+      )
+    `,
+    )
     .eq('chatId', chatId)
     .order('createdAt', { ascending: true });
 
