@@ -3,7 +3,7 @@ import supabase from './supabase';
 export const getJoinedChats = async (userId) => {
   const { data, error } = await supabase
     .from('chatParticipation')
-    .select(`chatId, userId, chat(id, name)`)
+    .select(`chatId, userId, chat(id, name, isPrivate)`)
     .eq('userId', userId);
 
   if (error) {

@@ -3,6 +3,7 @@ import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
 import { useDog, useMyDog } from '../../hooks/useDogs';
 import { useFollow, useUnfollow, useFollowing } from '../../hooks/useFollows';
+import { useCreateChat } from '../../hooks/useChats';
 import { capFirstLowerRest, calculateAge } from '../../utils/helpers';
 import { ImCross } from 'react-icons/im';
 import { BsCircleFill } from 'react-icons/bs';
@@ -22,6 +23,10 @@ const FullProfile = () => {
   );
   const { follow, isLoading: isWorking } = useFollow(myDog?.[0]?.id);
   const { unfollow, isLaoding: isUnfollowing } = useUnfollow(myDog?.[0]?.id);
+  const { createChat, isCreating, errorCreating } = useCreateChat(
+    user?.id,
+    dog?.id,
+  );
 
   const [searchParams] = useSearchParams();
 
@@ -31,10 +36,11 @@ const FullProfile = () => {
       isLoadingMyDog &&
       isWorking &&
       isLoadingFollowingList &&
-      isUnfollowing)
+      isUnfollowing &&
+      isCreating)
   )
     return <Loader />;
-  if (errorDog || (user && errorMyDog) || !dog) {
+  if (errorDog || (user && errorMyDog && errorCreating) || !dog) {
     toast.error('Error loading dogs');
     return null;
   }
@@ -75,6 +81,22 @@ const FullProfile = () => {
         userId: user.id,
       });
     }
+  };
+
+  const handleCreateChat = async () => {
+    if (!isAuthenticated) {
+      toast.error('Please login to send message');
+      navigate('/login');
+      return;
+    }
+    if (!user?.id || !dog?.userId) {
+      toast.error('Invalid user information.');
+      return;
+    }
+    createChat({
+      senderId: user.id,
+      receiverId: dog.userId,
+    });
   };
 
   return (
@@ -122,8 +144,11 @@ const FullProfile = () => {
           {dog.size}&nbsp;lb
         </li>
         <li className="col-span-1 flex justify-start">
-          {/* <Button type="primary">Message</Button> */}
-          <SendMessage dogToSendMessage={dog} user={user} />
+          <SendMessage
+            dogToSendMessage={dog}
+            user={user}
+            onClick={handleCreateChat}
+          />
         </li>
         <li className="col-span-3 overflow-hidden">
           <span className="font-bold">Breed: </span>

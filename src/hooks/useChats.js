@@ -36,7 +36,7 @@ export const useChatByName = (user1Id, user2Id) => {
 
 export const useCreateChat = () => {
   const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading, error } = useMutation({
     mutationFn: createEditChat,
     onSuccess: (data) => {
       queryClient.invalidateQueries(['chats']);
@@ -44,11 +44,12 @@ export const useCreateChat = () => {
       toast.success('Chat Room created!');
     },
     onError: (err) => {
+      console.error(err);
       toast.error(err.message);
     },
   });
 
-  return { createChat: mutate, isCreating: isLoading };
+  return { createChat: mutate, isCreating: isLoading, errorCreating: error };
 };
 
 export const useEditChat = () => {

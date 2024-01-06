@@ -15,16 +15,16 @@ const JoinedGroupChatList = () => {
     return null;
   }
 
+  const publicChats = joinedChats.filter(
+    (item) => item.chat.isPrivate === false,
+  );
+
   return (
     <section className="flex w-full flex-col items-center justify-center gap-2 md:w-1/2">
       <h3 className="mb-1 text-sm">My Chats</h3>
       <div className="flex w-full flex-col gap-1">
-        {joinedChats.map((item) => (
-          <JoinedGroupChatInfoCard
-            key={item.chat.id}
-            chat={item.chat}
-            isJoined={true}
-          />
+        {publicChats.map((item) => (
+          <JoinedGroupChatInfoCard key={item.chat.id} chat={item.chat} />
         ))}
       </div>
     </section>

@@ -4,12 +4,34 @@ import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
 
 // eslint-disable-next-line react/prop-types
-const SendMessage = ({ dogToSendMessage, user }) => {
+const SendMessage = ({ dogToSendMessage, user, onClick }) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const handleMessageButtonClick = () => {
+    if (onClick) {
+      onClick();
+    }
+
+    setModalOpen(true);
+  };
+
   return (
+    // <>
+    //   <Button onClick={() => setModalOpen((show) => !show)} type="primary">
+    //     Message
+    //   </Button>
+    //   {isModalOpen && (
+    //     <Modal title="Chat" onClose={() => setModalOpen(false)}>
+    //       <ChatRoom
+    //         dogToSendMessage={dogToSendMessage}
+    //         user={user}
+    //         onCloseModal={() => setModalOpen(false)}
+    //       />
+    //     </Modal>
+    //   )}
+    // </>
     <>
-      <Button onClick={() => setModalOpen((show) => !show)} type="primary">
+      <Button onClick={handleMessageButtonClick} type="primary">
         Message
       </Button>
       {isModalOpen && (

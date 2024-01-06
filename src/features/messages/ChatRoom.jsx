@@ -3,57 +3,57 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FaPaw } from 'react-icons/fa';
 // import { useJoinedChats } from '../../hooks/useChatParticipations';
-import { useChatByName } from '../../hooks/useChats';
-import { useAllMessages, useSendMessage } from '../../hooks/useMessages';
-import Loader from '../../ui/Loader';
+// import { useChatByName } from '../../hooks/useChats';
+// import { useSendMessage } from '../../hooks/useMessages';
+// import Loader from '../../ui/Loader';
 
 const ChatRoom = ({ dogToSendMessage, user }) => {
   const [formValue, setFormValue] = useState('');
   // const { joinedChats, isLoadingJoinedChats, errorJoinedChats } =
   //   useJoinedChats(user.id);
-  const { chat, isLoadingChat, errorChat } = useChatByName(
-    user.id,
-    dogToSendMessage.userId,
-  );
+  // const { chat, isLoadingChat, errorChat } = useChatByName(
+  //   user.id,
+  //   dogToSendMessage.userId,
+  // );
 
-  const { allMessages, isLoadingAllMessages, errorAllMessages } =
-    useAllMessages(chat?.id);
-  const { sendMessage, isSending, errorSending } = useSendMessage();
+  // const { allMessages, isLoadingAllMessages, errorAllMessages } =
+  //   useAllMessages(chat?.id);
+  // const { sendMessage, isSending, errorSending } = useSendMessage();
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (!formValue) {
-      toast.error('Please enter a message.');
-      return;
-    }
-    sendMessage({
-      content: formValue,
-      senderId: user.id,
-      receiverId: dogToSendMessage.userId,
-    });
-    setFormValue('');
-  };
+  // const handleSendMessage = async (e) => {
+  //   e.preventDefault();
+  //   if (!formValue) {
+  //     toast.error('Please enter a message.');
+  //     return;
+  //   }
+  //   sendMessage({
+  //     content: formValue,
+  //     senderId: user.id,
+  //     receiverId: dogToSendMessage.userId,
+  //   });
+  //   setFormValue('');
+  // };
 
-  if (!user?.id || !dogToSendMessage?.userId) {
-    toast.error('Invalid user information.');
-    return;
-  }
+  // if (!user?.id || !dogToSendMessage?.userId) {
+  //   toast.error('Invalid user information.');
+  //   return;
+  // }
 
-  if (isSending || isLoadingAllMessages || isLoadingChat) return <Loader />;
-  if (errorSending) {
-    toast.error('Error sending message');
-    return null;
-  }
-  if (errorAllMessages || errorChat) {
-    toast.error('Error loading messages');
-    return null;
-  }
+  // if (isSending) return <Loader />;
+  // if (errorSending) {
+  //   toast.error('Error sending message');
+  //   return null;
+  // }
+  // // if (errorChat) {
+  // //   toast.error('Error loading messages');
+  // //   return null;
+  // // }
 
   return (
     <section className="relative z-50 h-60">
-      <section>{allMessages}</section>
+      <section>allMessages</section>
       <form
-        onSubmit={handleSendMessage}
+        // onSubmit={handleSendMessage}
         className="absolute bottom-2 flex w-full items-center justify-between gap-1"
       >
         <input

@@ -66,10 +66,45 @@ export const findChatByName = async (user1Id, user2Id) => {
   return data;
 };
 
-export const createEditChat = async (newChat, id) => {
+export const checkForExistingChat = async (senderId, receiverId) => {
+  try {
+    const expectedChatName =
+      `${senderId}${receiverId}` || `${receiverId}${senderId}`;
+
+    // Query the chat table for a chat with the expected name and is private
+    const { data: chats, error: chatError } = await supabase
+      .from('chat')
+      .select('id, name, isPrivate')
+      .eq('name', expectedChatName)
+      .eq('isPrivate', true);
+
+    if (chatError) {
+      console.error('Error retrieving chat details:', chatError);
+      throw chatError;
+    }
+
+    // If a chat is found and it is private, return it
+    if (chats && chats.length > 0 && chats[0].isPrivate) {
+      return chats[0];
+    }
+    return null; // Return null if no chat is found or if it's not private
+  } catch (error) {
+    console.error('Exception when checking for existing chat:', error);
+    throw error;
+  }
+};
+
+export const createEditChat = async ({ newChat, senderId, receiverId, id }) => {
   let query = supabase.from('chat');
 
-  if (!id) query = query.insert([{ ...newChat }]);
+  if (!id)
+    query = query.insert([
+      {
+        name: `${senderId}${receiverId}`,
+        isPrivate: true,
+        userId: senderId,
+      },
+    ]);
   if (id) query = query.update({ ...newChat }).eq('id', id);
 
   const { data, error } = await query.select().single();
@@ -78,6 +113,17 @@ export const createEditChat = async (newChat, id) => {
     console.error(error);
     throw new Error('Chat Room could not be created');
   }
+
+  if (data) {
+    const participationData1 = await supabase
+      .from('chatParticipation')
+      .insert([{ chatId: data.id, userId: senderId }]);
+    const participationData2 = await supabase
+      .from('chatParticipation')
+      .insert([{ chatId: data.id, userId: receiverId }]);
+    return participationData1 && participationData2;
+  }
+
   return data;
 };
 
