@@ -35,7 +35,7 @@ const Followers = () => {
   }));
 
   return (
-    <section className="mb-2 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-1 p-3 md:mb-0 md:flex-row md:items-center md:gap-6 md:border-none lg:gap-16">
+    <section className="mb-2 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-1 p-3 md:mb-0 md:flex-row md:items-center md:gap-6 md:border-none lg:justify-evenly">
       <div className="flex items-center justify-center gap-2 md:flex-col md:gap-0">
         <span className="text-base font-bold md:text-center md:text-lg lg:text-xl">
           {followersList.length}
@@ -44,7 +44,7 @@ const Followers = () => {
           Followers
         </h2>
       </div>
-      <section className="flex h-72 w-full flex-col items-center gap-1 overflow-y-auto overflow-x-hidden lg:w-8/12">
+      <section className="flex h-72 w-full flex-col items-center gap-1 overflow-y-auto overflow-x-hidden lg:w-1/2">
         {dogswithDistance.length ? (
           dogswithDistance.map((dog) => {
             return <MiniProfile key={dog.id} dog={dog} />;
