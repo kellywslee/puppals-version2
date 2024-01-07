@@ -33,7 +33,7 @@ const OpenChatList = () => {
   return (
     <section className="flex w-full flex-col items-center justify-center gap-2 md:w-1/2">
       <h3 className="mb-1 text-sm">Join Now</h3>
-      <div className="flex w-full flex-col gap-1">
+      <div className="flex w-full flex-col gap-1 md:max-h-64 md:overflow-y-auto">
         {filteredChats.map((chat) => (
           <OpenChatInfoCard key={chat.id} chat={chat} user={user} />
         ))}

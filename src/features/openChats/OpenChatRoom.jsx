@@ -2,18 +2,15 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FaPaw } from 'react-icons/fa';
+import { useUser } from '../../hooks/useAuth';
 import { useMyDog } from '../../hooks/useDogs';
-import { useChatByName } from '../../hooks/useChats';
 import { useSendMessage, useAllMessages } from '../../hooks/useMessages';
 import ChatMessage from '../../ui/ChatMessage';
 import Loader from '../../ui/Loader';
 
-const ChatRoom = ({ dogToSendMessage, user }) => {
+const OpenChatRoom = ({ chat }) => {
   const [formValue, setFormValue] = useState('');
-  const { chat, isLoadingChat, errorChat } = useChatByName(
-    user.id,
-    dogToSendMessage.userId,
-  );
+  const { user } = useUser();
   const { myDog, isLoadingMyDog, errorMyDog } = useMyDog(user?.id);
   const { allMessages, isLoadingAllMessages, errorAllMessages } =
     useAllMessages(chat?.id);
@@ -27,20 +24,19 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
     }
     sendMessage({
       content: formValue,
-      userId: user.id,
+      userId: chat?.userId,
       chatId: chat?.id,
       dogId: myDog?.[0]?.id,
     });
     setFormValue('');
   };
 
-  if (!user?.id || !dogToSendMessage?.userId) {
+  if (!user?.id) {
     toast.error('Invalid user information.');
     return;
   }
 
-  if (isLoadingMyDog || isSending || isLoadingChat || isLoadingAllMessages)
-    return <Loader />;
+  if (isLoadingMyDog || isSending || isLoadingAllMessages) return <Loader />;
 
   if (errorMyDog) {
     toast.error('Error loading your dog');
@@ -50,7 +46,7 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
     toast.error('Error sending message');
     return null;
   }
-  if (errorChat || errorAllMessages) {
+  if (errorAllMessages) {
     toast.error('Error loading messages');
     return null;
   }
@@ -79,4 +75,4 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
   );
 };
 
-export default ChatRoom;
+export default OpenChatRoom;

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { toast } from 'react-hot-toast';
 import { useChatParticipantsCount } from '../../hooks/useChatParticipations';
-import Button from '../../ui/Button';
+import StartChat from './StartChat';
 import Loader from '../../ui/Loader';
 
 const JoinedOpenChatInfoCard = ({ chat }) => {
@@ -21,7 +21,7 @@ const JoinedOpenChatInfoCard = ({ chat }) => {
     <ul className="grid w-full grid-cols-chat rounded-lg border-1 p-2 text-sm transition-all hover:border-org">
       <li className="font-bold">{chat.name}</li>
       <li className="row-span-2 flex items-center">
-        <Button type="primary">Chat</Button>
+        <StartChat chat={chat} />
       </li>
       <li>
         {' '}

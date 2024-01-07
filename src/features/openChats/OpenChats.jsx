@@ -1,6 +1,6 @@
-import GroupChatOperations from './OpenChatOperations';
-import GroupChatList from './OpenChatList';
-import JoinedGroupChatList from './JoinedOpenChatList';
+import OpenChatOperations from './OpenChatOperations';
+import OpenChatList from './OpenChatList';
+import JoinedOpenChatList from './JoinedOpenChatList';
 
 const OpenChats = () => {
   return (
@@ -8,10 +8,10 @@ const OpenChats = () => {
       <h2 className="text-center text-base md:text-start md:text-lg lg:text-xl">
         Open Chats
       </h2>
-      <GroupChatOperations />
-      <div className="flex flex-col gap-2 md:flex-row md:items-start">
-        <GroupChatList />
-        <JoinedGroupChatList />
+      <OpenChatOperations />
+      <div className="flex flex-col gap-2 md:flex-row md:items-start ">
+        <OpenChatList />
+        <JoinedOpenChatList />
       </div>
     </section>
   );
