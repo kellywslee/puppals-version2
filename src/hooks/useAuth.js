@@ -80,7 +80,7 @@ export const useUser = () => {
 
   const isAuthenticated = user?.role === 'authenticated';
 
-  return { isLoading, user, isAuthenticated };
+  return { isLoadingUser: isLoading, user, isAuthenticated };
 };
 
 export const useUpdateUser = () => {

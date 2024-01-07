@@ -11,11 +11,10 @@ import {
 } from '../../utils/helpers';
 
 const UserDogProfile = () => {
-  const { user } = useUser();
+  const { user, isLoadingUser } = useUser();
   const { myDog, isLoading, error } = useMyDog(user?.id);
 
-  if (!user) return <Loader />;
-  if (isLoading) return <Loader />;
+  if (!user || isLoading || isLoadingUser) return <Loader />;
   if (error) return toast.error('Error fetching dog profile');
 
   const defaultDogData = {
@@ -34,14 +33,14 @@ const UserDogProfile = () => {
     message: 'No message yet',
   };
 
-  const dogData = myDog[0] || defaultDogData;
+  const dogData = myDog?.[0] || defaultDogData;
 
   return (
-    <article className="mb-4 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-1 p-3 md:mb-0 md:flex-row md:items-center md:border-none lg:gap-6">
+    <article className="mb-4 flex w-full flex-col items-center justify-center gap-2 rounded-lg border-1 p-3 md:mb-0 md:flex-row md:items-center md:border-none lg:justify-evenly lg:gap-0">
       <h2 className="text-base md:text-center md:text-lg lg:text-xl">
         My Dog&apos;s Profile
       </h2>
-      <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-3 gap-y-1 rounded-lg border-1 p-2 text-xs md:w-3/4 md:p-4 lg:text-sm">
+      <ul className="grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-3 gap-y-1 rounded-lg border-1 p-2 text-xs md:w-3/4 md:p-4 lg:w-1/2 lg:text-sm">
         <li className="col-span-1 row-span-4 place-self-start">
           <img
             src={dogData.image}
@@ -67,7 +66,7 @@ const UserDogProfile = () => {
           {capitalizeAllLetters(dogData.postalCode)}
         </li>
         <li className="col-span-1 flex items-center justify-start">
-          <EditProfile dogToEdit={myDog[0]} />
+          <EditProfile dogToEdit={myDog?.[0]} />
         </li>
         <li className="col-span-3 ">
           <span className="font-bold">Energy Level: </span>
