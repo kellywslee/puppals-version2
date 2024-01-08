@@ -162,7 +162,9 @@ export const createEditOpenChat = async (newChat, id) => {
   if (data) {
     const participationData = await supabase
       .from('chatParticipation')
-      .insert([{ chatId: data.id, userId: newChat.userId }]);
+      .insert([
+        { chatId: data.id, userId: newChat.userId, dogId: newChat.dogId },
+      ]);
     return participationData;
   }
 
