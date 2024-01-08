@@ -94,7 +94,12 @@ export const checkForExistingChat = async (senderId, receiverId) => {
   }
 };
 
-export const createChat = async ({ senderId, receiverId }) => {
+export const createChat = async ({
+  senderId,
+  receiverId,
+  senderDogId,
+  receiverDogId,
+}) => {
   // Check for existing chat first
   const existingChat = await checkForExistingChat(senderId, receiverId);
   let query = supabase.from('chat');
@@ -126,10 +131,10 @@ export const createChat = async ({ senderId, receiverId }) => {
     const [participationData1, participationData2] = await Promise.all([
       supabase
         .from('chatParticipation')
-        .insert({ chatId: data.id, userId: senderId }),
+        .insert({ chatId: data.id, userId: senderId, dogId: senderDogId }),
       supabase
         .from('chatParticipation')
-        .insert({ chatId: data.id, userId: receiverId }),
+        .insert({ chatId: data.id, userId: receiverId, dogId: receiverDogId }),
     ]);
 
     return {

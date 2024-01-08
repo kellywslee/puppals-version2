@@ -96,8 +96,8 @@ const FullProfile = () => {
     createChat({
       senderId: user.id,
       receiverId: dog.userId,
-      // senderDogId: myDog?.[0]?.id,
-      // receiverDogId: dog.id,
+      senderDogId: myDog?.[0]?.id,
+      receiverDogId: dog.id,
     });
   };
 
