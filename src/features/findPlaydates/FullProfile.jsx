@@ -96,12 +96,14 @@ const FullProfile = () => {
     createChat({
       senderId: user.id,
       receiverId: dog.userId,
+      // senderDogId: myDog?.[0]?.id,
+      // receiverDogId: dog.id,
     });
   };
 
   return (
-    <article className="flex items-center justify-center md:mt-2 lg:mt-0 lg:w-1/2">
-      <ul className="relative grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-1 rounded-lg border-1 p-2 text-sm md:w-2/3 lg:h-full lg:w-full lg:p-8">
+    <section className="flex items-center justify-center md:mt-2 lg:mt-0 lg:w-1/2">
+      <ul className="relative grid grid-cols-[auto] grid-rows-[auto] items-center gap-x-4 gap-y-1 rounded-lg border-1  p-2 text-sm md:w-2/3 lg:h-full lg:w-full lg:p-8">
         <li className="col-span-1 row-span-3 flex justify-start">
           <img
             src={dog.image}
@@ -167,7 +169,7 @@ const FullProfile = () => {
           {dog.message}
         </li>
       </ul>
-    </article>
+    </section>
   );
 };
 

@@ -28,6 +28,20 @@ export const getChatParticipantsCount = async (chatId) => {
   return count;
 };
 
+export const getChatParticipants = async (chatId) => {
+  const { data, error } = await supabase
+    .from('chatParticipation')
+    .select('userId')
+    .eq('chatId', chatId);
+
+  if (error) {
+    console.error(error);
+    throw new Error('Participants could not be loaded');
+  }
+
+  return data;
+};
+
 export const joinChat = async ({ userId, chatId }) => {
   const { data, error } = await supabase
     .from('chatParticipation')

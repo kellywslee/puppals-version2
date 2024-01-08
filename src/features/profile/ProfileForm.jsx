@@ -65,7 +65,7 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
           onSuccess: () => {
             reset();
             onCloseModal?.();
-            navigate('/dashboard');
+            navigate('/dashboard/profile');
           },
         },
       );
@@ -76,7 +76,7 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
           onSuccess: () => {
             reset();
             onCloseModal?.();
-            navigate('/dashboard');
+            navigate('/dashboard/profile');
           },
         },
       );

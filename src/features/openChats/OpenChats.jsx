@@ -5,7 +5,7 @@ import JoinedOpenChatList from './JoinedOpenChatList';
 const OpenChats = () => {
   return (
     <section className="flex w-full flex-col gap-2 p-2">
-      <h2 className="text-center text-base md:text-start md:text-lg lg:text-xl">
+      <h2 className="text-center text-base md:text-lg lg:text-xl">
         Open Chats
       </h2>
       <OpenChatOperations />

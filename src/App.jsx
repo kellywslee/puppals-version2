@@ -1,3 +1,4 @@
+// import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -6,13 +7,11 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import PrivateChats from './features/privateChats/PrivateChats';
 import OpenChats from './features/openChats/OpenChats';
-import UserDogProfile from './features/profile/UserDogProfile';
-import Followers from './features/playdates/Followers';
-import Following from './features/playdates/Following';
+import Playdates from './features/playdates/Playdates';
+import Profile from './features/profile/Profile';
 import FindPlaydates from './pages/FindPlaydates';
 import DogList from './features/findPlaydates/DogList';
 import FullProfile from './features/findPlaydates/FullProfile';
-import Setting from './pages/Setting';
 import DevContact from './pages/DevContact';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -76,39 +75,23 @@ const App = () => {
                 }
               />
               <Route
-                path="followers"
+                path="myplaydates"
                 element={
                   <ProtectedRoute>
-                    <Followers />
+                    <Playdates />
                   </ProtectedRoute>
                 }
               />
-              <Route
-                path="following"
-                element={
-                  <ProtectedRoute>
-                    <Following />
-                  </ProtectedRoute>
-                }
-              />
+
               <Route
                 path="profile"
                 element={
                   <ProtectedRoute>
-                    <UserDogProfile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="setting"
-                element={
-                  <ProtectedRoute>
-                    <Setting />
+                    <Profile />
                   </ProtectedRoute>
                 }
               />
             </Route>
-
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="forgotpassword" element={<ForgotPassword />} />

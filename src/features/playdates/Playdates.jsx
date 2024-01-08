@@ -1,18 +1,18 @@
-import DirectMessagesList from './DirectMessagesList';
-import GroupChatsList from './GroupChatsList';
+import Followers from './Followers';
+import Following from './Following';
 
-const PrivateChats = () => {
+const Playdates = () => {
   return (
     <section className="flex w-full flex-col gap-2 p-2">
       <h2 className="text-center text-base md:text-lg lg:text-xl">
-        Private Chats
+        My Playdates
       </h2>
       <div className="flex flex-col gap-2 md:flex-row md:items-start ">
-        <DirectMessagesList />
-        <GroupChatsList />
+        <Followers />
+        <Following />
       </div>
     </section>
   );
 };
 
-export default PrivateChats;
+export default Playdates;

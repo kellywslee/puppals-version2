@@ -18,7 +18,7 @@ const JoinedOpenChatInfoCard = ({ chat }) => {
   }
 
   return (
-    <ul className="grid w-full grid-cols-chat rounded-lg border-1 p-2 text-sm transition-all hover:border-org">
+    <ul className="grid w-full grid-cols-chat rounded-lg border-1  p-2 text-sm transition-all hover:border-org">
       <li className="font-bold">{chat.name}</li>
       <li className="row-span-2 flex items-center">
         <StartChat chat={chat} />
