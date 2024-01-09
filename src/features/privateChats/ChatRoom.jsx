@@ -14,6 +14,7 @@ const ChatRoom = ({ dogToSendMessage, user }) => {
     user.id,
     dogToSendMessage.userId,
   );
+
   const { myDog, isLoadingMyDog, errorMyDog } = useMyDog(user?.id);
   const { allMessages, isLoadingAllMessages, errorAllMessages } =
     useAllMessages(chat?.id);

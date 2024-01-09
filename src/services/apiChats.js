@@ -66,28 +66,36 @@ export const findChatByName = async (user1Id, user2Id) => {
   return data;
 };
 
-export const checkForExistingChat = async (senderId, receiverId) => {
+export const findExistingChat = async (senderId, receiverId) => {
   try {
-    const expectedChatName =
-      `${senderId}${receiverId}` || `${receiverId}${senderId}`;
+    // Find all chat IDs where the sender is a participant
+    const { data: senderChats, error: senderError } = await supabase
+      .from('chatParticipation')
+      .select('chatId')
+      .eq('userId', senderId);
 
-    // Query the chat table for a chat with the expected name and is private
-    const { data: chats, error: chatError } = await supabase
-      .from('chat')
-      .select('id, name, isPrivate')
-      .eq('name', expectedChatName)
-      .eq('isPrivate', true);
-
-    if (chatError) {
-      console.error('Error retrieving chat details:', chatError);
-      throw chatError;
+    if (senderError) {
+      console.error('Error retrieving sender chat details:', senderError);
+      throw senderError;
     }
 
-    // If a chat is found and it is private, return it
-    if (chats && chats.length > 0 && chats[0].isPrivate) {
-      return chats[0];
+    // Extract chat IDs from the sender's participations
+    const senderChatIds = senderChats.map((chat) => chat.chatId);
+
+    // Find if the receiver is in any of the sender's chats
+    const { data: sharedChats, error: sharedChatError } = await supabase
+      .from('chatParticipation')
+      .select('chatId, chat!inner(isPrivate)')
+      .in('chatId', senderChatIds)
+      .eq('userId', receiverId);
+
+    if (sharedChatError) {
+      console.error('Error retrieving shared chat details:', sharedChatError);
+      throw sharedChatError;
     }
-    return null; // Return null if no chat is found or if it's not private
+
+    const privateChat = sharedChats.find((chat) => chat.chat.isPrivate);
+    return privateChat ? privateChat.chat : null;
   } catch (error) {
     console.error('Exception when checking for existing chat:', error);
     throw error;
@@ -101,7 +109,7 @@ export const createChat = async ({
   receiverDogId,
 }) => {
   // Check for existing chat first
-  const existingChat = await checkForExistingChat(senderId, receiverId);
+  const existingChat = await findExistingChat(senderId, receiverId);
   let query = supabase.from('chat');
 
   if (existingChat) {
@@ -117,6 +125,7 @@ export const createChat = async ({
         name: `${senderId}${receiverId}`,
         isPrivate: true,
         userId: senderId,
+        dogId: senderDogId,
       },
     ]);
 
