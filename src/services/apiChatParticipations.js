@@ -31,7 +31,7 @@ export const getChatParticipantsCount = async (chatId) => {
 export const getChatParticipants = async (chatId) => {
   const { data, error } = await supabase
     .from('chatParticipation')
-    .select('userId')
+    .select(`chatId, userId, dogId, dog:dogId(id, name, image)`)
     .eq('chatId', chatId);
 
   if (error) {

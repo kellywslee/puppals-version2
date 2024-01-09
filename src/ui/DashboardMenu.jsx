@@ -8,23 +8,24 @@ const DashboardMenu = () => {
   const list = [
     {
       id: 1,
-      name: 'Private Chats',
-      icon: <GoMail />,
-      path: '/dashboard/privatechats',
+      name: 'My Playdates',
+      icon: <PiDogFill />,
+      path: '/dashboard/myplaydates',
     },
+    { id: 2, name: 'Profile', icon: <CgProfile />, path: '/dashboard/profile' },
+
     {
-      id: 2,
+      id: 3,
       name: 'Open Chats',
       icon: <LiaUserFriendsSolid />,
       path: '/dashboard/openchats',
     },
     {
-      id: 3,
-      name: 'My Playdates',
-      icon: <PiDogFill />,
-      path: '/dashboard/myplaydates',
+      id: 4,
+      name: 'Private Chats',
+      icon: <GoMail />,
+      path: '/dashboard/privatechats',
     },
-    { id: 4, name: 'Profile', icon: <CgProfile />, path: '/dashboard/profile' },
   ];
   return (
     <section className="w-full rounded-lg border-1 p-3 text-xs md:w-1/3">

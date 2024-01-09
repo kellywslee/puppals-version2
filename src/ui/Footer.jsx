@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="h-18 flex w-full items-center justify-center bg-green2 p-2">
-      <div className=" flex w-11/12 max-w-7xl flex-col items-center justify-center gap-y-1 text-xs">
+      <div className=" flex w-11/12 max-w-7xl flex-col items-center justify-center gap-y-1 text-center text-xs">
         <p>YorkU Full-Stack Web Development Program Project 2023</p>
         <p>
           Developed and designed with love ❤️

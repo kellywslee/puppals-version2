@@ -57,23 +57,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             >
-              <Route index element={<Navigate replace to="privatechats" />} />
-              <Route
-                path="privatechats"
-                element={
-                  <ProtectedRoute>
-                    <PrivateChats />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="openchats"
-                element={
-                  <ProtectedRoute>
-                    <OpenChats />
-                  </ProtectedRoute>
-                }
-              />
+              <Route index element={<Navigate replace to="myplaydates" />} />
               <Route
                 path="myplaydates"
                 element={
@@ -88,6 +72,23 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="openchats"
+                element={
+                  <ProtectedRoute>
+                    <OpenChats />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="privatechats"
+                element={
+                  <ProtectedRoute>
+                    <PrivateChats />
                   </ProtectedRoute>
                 }
               />
