@@ -1,17 +1,27 @@
 import { Link } from 'react-router-dom';
 import Button from '../ui/Button';
-import mainPhoto from '../assets/bunchaziggy.png';
-import mainPhotoWebp from '../assets/bunchaziggy.webp';
+import mainPhotoSmallWebp from '../assets/mainPhotoSmall.webp';
+import mainPhotoLarge from '../assets/mainPhotoLarge.png';
+import mainPhotoLargeWebp from '../assets/mainPhotoLarge.webp';
 
 const Home = () => {
   return (
     <main className="lg:flex-row lg:gap-16">
       <section>
         <picture className="mb-5 flex h-48 w-48 items-center justify-center  rounded-3xl bg-org md:h-56 md:w-56">
-          <source srcSet={mainPhotoWebp} type="image/webp" />
+          <source
+            srcSet={mainPhotoSmallWebp}
+            media="(max-width: 480px)"
+            type="image/webp"
+          />
+          <source
+            srcSet={mainPhotoLargeWebp}
+            media="(min-width: 481px) and (max-width: 1024px)"
+            type="image/webp"
+          />
           <img
             className="h-5/6 w-5/6 rounded-3xl border-org  object-cover"
-            src={mainPhoto}
+            src={mainPhotoLarge}
             alt="Two small dogs, a black and white one and a tan one, sitting together on a plush dog bed designed to look like a sports car"
           />
         </picture>
