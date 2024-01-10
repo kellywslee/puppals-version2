@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Icon } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../hooks/useAuth';
