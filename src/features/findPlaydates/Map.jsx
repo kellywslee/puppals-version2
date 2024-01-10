@@ -9,8 +9,13 @@ import { useGeolocation } from '../../hooks/useGeolocation';
 import Loader from '../../ui/Loader';
 import Button from '../../ui/Button';
 import 'leaflet/dist/leaflet.css';
+import marker from '../../assets/marker.png';
 
 const Map = () => {
+  const myIcon = new Icon({
+    iconUrl: marker,
+    iconSize: [32, 32],
+  });
   const { dogs, isLoadingAllDogs, error: errorAllDogs } = useAllDogs();
   const { user } = useUser();
   const { myDog, isLoadingMyDog, error: errorMyDog } = useMyDog(user?.id);
@@ -103,6 +108,7 @@ const Map = () => {
         {dogs.map((dog) => (
           <Marker
             position={[dog.lat, dog.lng]}
+            icon={myIcon}
             key={dog.id}
             eventHandlers={{
               click: () => handleMarkerClick(dog),
