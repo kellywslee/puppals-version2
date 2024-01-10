@@ -15,8 +15,6 @@ import FullProfile from './features/findPlaydates/FullProfile';
 import DevContact from './pages/DevContact';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
 import ProtectedRoute from './ui/ProtectedRoute';
 import PageNotFound from './pages/PageNotFound';
 import CustomToaster from './ui/Toaster';
@@ -95,8 +93,6 @@ const App = () => {
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="forgotpassword" element={<ForgotPassword />} />
-            <Route path="resetpassword" element={<ResetPassword />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

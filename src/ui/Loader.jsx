@@ -1,8 +1,8 @@
-import { Hearts } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Loader = () => {
   return (
-    <Hearts
+    <ThreeDots
       color="#ffbf69"
       wrapperStyle={{
         display: 'flex',

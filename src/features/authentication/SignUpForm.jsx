@@ -13,21 +13,21 @@ const SignUpForm = () => {
     formState: { errors },
   } = useForm({ mode: 'onBlur' });
 
-  const onSubmit = (data) => {
-    const { email, password, confirmPassword } = data;
-    signup(
-      { email, password, confirmPassword },
-      {
-        onSettled: () => {
-          reset();
-        },
-      },
-    );
-  };
+  // const onSubmit = (data) => {
+  //   const { email, password, confirmPassword } = data;
+  //   signup(
+  //     { email, password, confirmPassword },
+  //     {
+  //       onSettled: () => {
+  //         reset();
+  //       },
+  //     },
+  //   );
+  // };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      // onSubmit={handleSubmit(onSubmit)}
       className="flex w-11/12 max-w-md flex-col items-center justify-center gap-y-4"
     >
       <Input
@@ -41,7 +41,8 @@ const SignUpForm = () => {
         }}
         type="email"
         placeholder="Email"
-        disabled={isLoading}
+        // disabled={isLoading}
+        disabled={true}
         error={errors.email}
       />
       <Input
@@ -54,7 +55,8 @@ const SignUpForm = () => {
         }}
         type="password"
         placeholder="Password"
-        disabled={isLoading}
+        // disabled={isLoading}
+        disabled={true}
         error={errors.password}
       />
       <Input
@@ -63,7 +65,8 @@ const SignUpForm = () => {
         required="This field is required"
         type="password"
         placeholder="Confirm Password"
-        disabled={isLoading}
+        // disabled={isLoading}
+        disabled={true}
         error={errors.confirmPassword}
       />
       <Button type="special">Sign Up</Button>
@@ -75,8 +78,8 @@ const SignUpForm = () => {
         >
           Forgot password?
         </Link>
-        <Link to="/signup" className="hover:font-bold hover:underline">
-          Don&apos;t have an account? Sign Up
+        <Link to="/login" className="hover:font-bold hover:underline">
+          Already a member? Sign In!
         </Link>
       </div>
     </form>

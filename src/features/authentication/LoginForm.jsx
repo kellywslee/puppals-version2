@@ -11,7 +11,12 @@ const LoginForm = () => {
     reset,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: 'test1@email.com',
+      password: import.meta.env.VITE_DEMO_PASSWORD,
+    },
+  });
 
   const onSubmit = (data) => {
     const { email, password } = data;

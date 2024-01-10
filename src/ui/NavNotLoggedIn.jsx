@@ -6,7 +6,7 @@ import Button from './Button';
 const menus = [
   { id: 1, name: 'PupPals', path: '/' },
   { id: 2, name: 'FIND PLAYDATES', path: '/findplaydates' },
-  { id: 3, name: 'DEV CONTACT', path: '/contac' },
+  { id: 3, name: 'DEV CONTACT', path: '/contact' },
 ];
 
 const NavNotLoggedIn = () => {
