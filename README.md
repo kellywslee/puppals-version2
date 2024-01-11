@@ -14,8 +14,8 @@ PupPals is a social platform designed to connect dog owners and their dogs for p
 The first version of the PupPals was crafted during the YorkU Full Stack program.
 
 Technology Stack
-- Frontend: React with Context API (https://github.com/kellywslee/PupPals-Frontend)
-- Backend: Express.js & MySQL (https://github.com/kellywslee/PupPals-Backend)
+- Frontend: React with Context API [Repo](https://github.com/kellywslee/PupPals-Frontend)
+- Backend: Express.js & MySQL [Repo](https://github.com/kellywslee/PupPals-Backend)
 - Deployment: Google Cloud Platform using Docker
 
 ### 🔸Version 2
