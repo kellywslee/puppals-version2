@@ -2,6 +2,8 @@
 
 🚀 [Live Demo](https://puppals.space)
 
+![image](https://github.com/kellywslee/puppals-version2/assets/76071382/5160a2dc-4097-4483-9115-8fb353ec46cf)
+
 ### 🐶 Find doggie playdates at PupPals!
 ---
 
