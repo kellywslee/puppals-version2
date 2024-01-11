@@ -11,7 +11,7 @@ The first version of the PupPals was crafted during the YorkU Full Stack program
 
 Technology Stack
 - Frontend: React with Context API (https://github.com/kellywslee/PupPals-Frontend)
-- Backend: MySQL (https://github.com/kellywslee/PupPals-Backend)
+- Backend: Express.js & MySQL (https://github.com/kellywslee/PupPals-Backend)
 - Deployment: Google Cloud Platform using Docker
 
 ### 🔸Version 2
@@ -24,6 +24,6 @@ Technology Stack
 
 ### ⌨️ Available Scripts
 
- `npm install`
- `npm run dev`
- `npm start`
+ - `npm install`
+ - `npm run dev`
+ - `npm start`
