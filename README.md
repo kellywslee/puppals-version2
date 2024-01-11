@@ -1,8 +1,10 @@
 # PupPals - Version 2
+---
 
 🚀 [Live Demo](https://puppals.space)
 
 ### 🐶 Find doggie playdates at PupPals!
+---
 
 PupPals is a social platform designed to connect dog owners and their dogs for playdates. Users can easily search and browse profiles of other dogs in their area, including their photo, name, breed, size, age, and energy level, making it easy to find the perfect playdate match for their dogs. They can also add other dogs to their friend list and message them directly to schedule playdates.
 
@@ -16,6 +18,7 @@ Technology Stack
 - Deployment: Google Cloud Platform using Docker
 
 ### 🔸Version 2
+---
 Added a new feature - 1:1 and group chat
 
 Technology Stack
@@ -24,6 +27,7 @@ Technology Stack
 - Deployment: Netlify
 
 ### ⌨️ Available Scripts
+---
 
  - `npm install`
  - `npm run dev`
