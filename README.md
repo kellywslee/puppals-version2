@@ -1,5 +1,4 @@
 # PupPals - Version 2
----
 
 🚀 [Live Demo](https://puppals.space)
 
