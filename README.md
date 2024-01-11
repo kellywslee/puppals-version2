@@ -2,7 +2,7 @@
 
 🚀 [Live Demo](https://puppals.space)
 
-<img src="https://github.com/kellywslee/puppals-version2/assets/76071382/5160a2dc-4097-4483-9115-8fb353ec46cf" width="800" height="400">
+<img src="https://github.com/kellywslee/puppals-version2/assets/76071382/5160a2dc-4097-4483-9115-8fb353ec46cf" width="600" height="300">
 
 ### 🐶 Find doggie playdates at PupPals!
 ---
