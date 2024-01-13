@@ -32,4 +32,4 @@ Technology Stack
 
  - `npm install`
  - `npm run dev`
- - `npm start`
+
