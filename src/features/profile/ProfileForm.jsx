@@ -337,7 +337,9 @@ const ProfileForm = ({ dogToEdit = {}, onCloseModal }) => {
         <Button onClick={onCloseModal} type="outline">
           Cancel
         </Button>
-        <Button type="profileEdit">Edit</Button>
+        <Button type="profileEdit" disabled={true}>
+          Edit
+        </Button>
       </div>
     </form>
   );

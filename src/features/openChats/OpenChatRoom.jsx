@@ -63,6 +63,7 @@ const OpenChatRoom = ({ chat }) => {
       >
         <input
           value={formValue}
+          disabled={true}
           onChange={(e) => setFormValue(e.target.value)}
           placeholder="Message"
           className="w-11/12 rounded-lg border-1 p-2 outline-slate-950"
