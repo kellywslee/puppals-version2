@@ -27,9 +27,4 @@ Technology Stack
 - Backend: Supabase
 - Deployment: Netlify
 
-### ⌨️ Available Scripts
----
-
- - `npm install`
- - `npm run dev`
 
